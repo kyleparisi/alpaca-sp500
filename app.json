@@ -1,0 +1,903 @@
+[
+  {
+    "app": {
+      "style": {
+        "width": "100%",
+        "height": "100%",
+        "transition": "transform 0.2s"
+      },
+      "svgStyle": {
+        "width": "100%",
+        "height": "100vh",
+        "overflow": "visible",
+        "transition": "transform 0.2s"
+      },
+      "linkStyle": {
+        "strokeWidth": 1,
+        "strokeLinejoin": "round",
+        "strokeLinecap": "round",
+        "fill": "none"
+      },
+      "linkOverlapStyle": {
+        "strokeWidth": 50,
+        "strokeLinejoin": "round",
+        "strokeLinecap": "round",
+        "fill": "none",
+        "stroke": "rgba(230, 230, 230, 0)"
+      }
+    },
+    "pan": {
+      "x": -451,
+      "y": -78
+    },
+    "scale": 1,
+    "links": {
+      "0": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 2,
+          "port": "alpaca"
+        },
+        "id": 0,
+        "layer_id": 0
+      },
+      "8": {
+        "direction": "->",
+        "source": {
+          "node": 18,
+          "port": "data"
+        },
+        "target": {
+          "node": 14,
+          "port": "data"
+        },
+        "id": 8,
+        "layer_id": 0,
+        "logging": false
+      },
+      "16": {
+        "direction": "->",
+        "source": {
+          "node": 3,
+          "port": "data"
+        },
+        "target": {
+          "node": 17,
+          "port": "data"
+        },
+        "id": 16,
+        "layer_id": 0,
+        "logging": false
+      },
+      "18": {
+        "direction": "->",
+        "source": {
+          "node": 17,
+          "port": "data"
+        },
+        "target": {
+          "node": 18,
+          "port": "data"
+        },
+        "id": 18,
+        "layer_id": 0
+      },
+      "19": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "negative"
+        },
+        "target": {
+          "node": 20,
+          "port": "data"
+        },
+        "id": 19,
+        "layer_id": 0,
+        "logging": false
+      },
+      "20": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "positive"
+        },
+        "target": {
+          "node": 19,
+          "port": "data"
+        },
+        "id": 20,
+        "layer_id": 0
+      },
+      "21": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 21,
+          "port": "alpaca"
+        },
+        "id": 21,
+        "layer_id": 0
+      },
+      "22": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 22,
+          "port": "alpaca"
+        },
+        "id": 22,
+        "layer_id": 0
+      },
+      "23": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 3,
+          "port": "alpaca"
+        },
+        "id": 23,
+        "layer_id": 0
+      },
+      "24": {
+        "direction": "->",
+        "source": {
+          "node": 4,
+          "port": "data"
+        },
+        "target": {
+          "node": 3,
+          "port": "timeframe"
+        },
+        "id": 24,
+        "layer_id": 0
+      },
+      "25": {
+        "direction": "->",
+        "source": {
+          "node": 5,
+          "port": "data"
+        },
+        "target": {
+          "node": 3,
+          "port": "symbols"
+        },
+        "id": 25,
+        "layer_id": 0
+      },
+      "27": {
+        "direction": "->",
+        "source": {
+          "node": 2,
+          "port": "data"
+        },
+        "target": {
+          "node": 24,
+          "port": "data"
+        },
+        "id": 27,
+        "layer_id": 0
+      },
+      "28": {
+        "direction": "->",
+        "source": {
+          "node": 22,
+          "port": "data"
+        },
+        "target": {
+          "node": 25,
+          "port": "data"
+        },
+        "id": 28,
+        "layer_id": 0,
+        "logging": false
+      },
+      "29": {
+        "direction": "->",
+        "source": {
+          "node": 21,
+          "port": "data"
+        },
+        "target": {
+          "node": 26,
+          "port": "data"
+        },
+        "id": 29,
+        "layer_id": 0,
+        "logging": false
+      },
+      "30": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "combined"
+        },
+        "target": {
+          "node": 23,
+          "port": "data"
+        },
+        "id": 30,
+        "layer_id": 0
+      },
+      "32": {
+        "direction": "->",
+        "source": {
+          "node": 25,
+          "port": "false"
+        },
+        "target": {
+          "node": 23,
+          "port": "noPositions"
+        },
+        "id": 32,
+        "layer_id": 0
+      },
+      "33": {
+        "direction": "->",
+        "source": {
+          "node": 26,
+          "port": "true"
+        },
+        "target": {
+          "node": 23,
+          "port": "account"
+        },
+        "id": 33,
+        "layer_id": 0,
+        "logging": false
+      },
+      "34": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 27,
+          "port": "alpaca"
+        },
+        "id": 34,
+        "layer_id": 0
+      },
+      "35": {
+        "direction": "->",
+        "source": {
+          "node": 23,
+          "port": "data"
+        },
+        "target": {
+          "node": 27,
+          "port": "data"
+        },
+        "id": 35,
+        "layer_id": 0
+      },
+      "36": {
+        "direction": "->",
+        "source": {
+          "node": 25,
+          "port": "true"
+        },
+        "target": {
+          "node": 28,
+          "port": "positions"
+        },
+        "id": 36,
+        "layer_id": 0
+      },
+      "38": {
+        "direction": "->",
+        "source": {
+          "node": 28,
+          "port": "positions"
+        },
+        "target": {
+          "node": 29,
+          "port": "data"
+        },
+        "id": 38,
+        "layer_id": 0
+      },
+      "39": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "stocks"
+        },
+        "target": {
+          "node": 28,
+          "port": "score"
+        },
+        "id": 39,
+        "layer_id": 0
+      },
+      "40": {
+        "direction": "->",
+        "source": {
+          "node": 29,
+          "port": "orders"
+        },
+        "target": {
+          "node": 27,
+          "port": "data"
+        },
+        "id": 40,
+        "layer_id": 0
+      },
+      "41": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 30,
+          "port": "alpaca"
+        },
+        "id": 41,
+        "layer_id": 0
+      },
+      "42": {
+        "direction": "->",
+        "source": {
+          "node": 30,
+          "port": "data"
+        },
+        "target": {
+          "node": 31,
+          "port": "orders"
+        },
+        "id": 42,
+        "layer_id": 0
+      },
+      "43": {
+        "direction": "->",
+        "source": {
+          "node": 31,
+          "port": "false"
+        },
+        "target": {
+          "node": 27,
+          "port": "noOpenOrders"
+        },
+        "id": 43,
+        "layer_id": 0
+      },
+      "44": {
+        "direction": "->",
+        "source": {
+          "node": 28,
+          "port": "noSells"
+        },
+        "target": {
+          "node": 32,
+          "port": "noSells"
+        },
+        "id": 44,
+        "layer_id": 0
+      },
+      "45": {
+        "direction": "->",
+        "source": {
+          "node": 26,
+          "port": "true"
+        },
+        "target": {
+          "node": 32,
+          "port": "hasBuyingPower"
+        },
+        "id": 45,
+        "layer_id": 0
+      },
+      "46": {
+        "direction": "->",
+        "source": {
+          "node": 31,
+          "port": "false"
+        },
+        "target": {
+          "node": 32,
+          "port": "noOrders"
+        },
+        "id": 46,
+        "layer_id": 0
+      },
+      "47": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "combined"
+        },
+        "target": {
+          "node": 32,
+          "port": "stocks"
+        },
+        "id": 47,
+        "layer_id": 0
+      },
+      "48": {
+        "direction": "->",
+        "source": {
+          "node": 32,
+          "port": "data"
+        },
+        "target": {
+          "node": 27,
+          "port": "data"
+        },
+        "id": 48,
+        "layer_id": 0
+      }
+    },
+    "nodes": {
+      "1": {
+        "module": "js",
+        "name": "Alpaca",
+        "require": "const Alpaca = require('@alpacahq/alpaca-trade-api');",
+        "run": "const alpaca = new Alpaca({\n  keyId: process.env.ALPACA_KEY,\n  secretKey: process.env.ALPACA_SECRET,\n  paper: true,\n})\noutputs.alpaca.put(alpaca);",
+        "inputs": {},
+        "outputs": {
+          "alpaca": true
+        },
+        "id": 1,
+        "layer_id": 0,
+        "position": {
+          "left": 13,
+          "right": 218,
+          "top": 95
+        },
+        "symbol": "https://app.alpaca.markets/resources/images/logo-inverse-white-mobile.png"
+      },
+      "2": {
+        "module": "js",
+        "name": "getClock",
+        "require": "",
+        "run": "const alpaca = await inputs.alpaca.take();\nalpaca.getClock().then(outputs.data.put);",
+        "inputs": {
+          "alpaca": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 2,
+        "layer_id": 0,
+        "position": {
+          "left": 268,
+          "right": 388,
+          "top": 251
+        }
+      },
+      "3": {
+        "module": "js",
+        "name": "getBarset",
+        "require": "",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
+        "inputs": {
+          "alpaca": true,
+          "timeframe": true,
+          "symbols": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 3,
+        "layer_id": 0,
+        "position": {
+          "left": 248,
+          "right": 366,
+          "top": 396
+        }
+      },
+      "4": {
+        "module": "js",
+        "name": "Last 50 days",
+        "require": "const moment = require(\"moment\")",
+        "run": "const start = moment().hours(9).minutes(30).seconds(0).subtract(50, 'days').toDate();\nconst end = moment().hours(9).minutes(30).seconds(0).toDate();\n\noutputs.data.put({start, end});",
+        "inputs": {},
+        "outputs": {
+          "data": true
+        },
+        "id": 4,
+        "layer_id": 0,
+        "position": {
+          "left": 39,
+          "right": 163,
+          "top": 361
+        }
+      },
+      "5": {
+        "module": "js",
+        "name": "S&P 500 Symbols",
+        "require": "",
+        "run": "if (!outputs) return;\noutputs.data.put([\n\"MMM\",\n\"ABT\",\n\"ABBV\",\n\"ABMD\",\n\"ACN\",\n\"ATVI\",\n\"ADBE\",\n\"AMD\",\n\"AAP\",\n\"AES\",\n\"AMG\",\n\"AFL\",\n\"A\",\n\"APD\",\n\"AKAM\",\n\"ALK\",\n\"ALB\",\n\"ARE\",\n\"ALXN\",\n\"ALGN\",\n\"ALLE\",\n\"AGN\",\n\"ADS\",\n\"LNT\",\n\"ALL\",\n\"GOOGL\",\n\"GOOG\",\n\"MO\",\n\"AMZN\",\n\"AEE\",\n\"AAL\",\n\"AEP\",\n\"AXP\",\n\"AIG\",\n\"AMT\",\n\"AWK\",\n\"AMP\",\n\"ABC\",\n\"AME\",\n\"AMGN\",\n\"APH\",\n\"APC\",\n\"ADI\",\n\"ANSS\",\n\"ANTM\",\n\"AON\",\n\"AOS\",\n\"APA\",\n\"AIV\",\n\"AAPL\",\n\"AMAT\",\n\"APTV\",\n\"ADM\",\n\"ARNC\",\n\"ANET\",\n\"AJG\",\n\"AIZ\",\n\"ATO\",\n\"T\",\n\"ADSK\",\n\"ADP\",\n\"AZO\",\n\"AVB\",\n\"AVY\",\n\"BHGE\",\n\"BLL\",\n\"BAC\",\n\"BK\",\n\"BAX\",\n\"BBT\",\n\"BDX\",\n\"BRK\",\n\"BBY\",\n\"BIIB\",\n\"BLK\",\n\"HRB\",\n\"BA\",\n\"BKNG\",\n\"BWA\",\n\"BXP\",\n\"BSX\",\n\"BMY\",\n\"AVGO\",\n\"BR\",\n\"BF\",\n\"CHRW\",\n\"COG\",\n\"CDNS\",\n\"CPB\",\n\"COF\",\n\"CPRI\",\n\"CAH\",\n\"KMX\",\n\"CCL\",\n\"CAT\",\n\"CBRE\",\n\"CBS\",\n\"CE\",\n\"CELG\",\n\"CNC\",\n\"CNP\",\n\"CTL\",\n\"CERN\",\n\"CF\",\n\"SCHW\",\n\"CHTR\",\n\"CVX\",\n\"CMG\",\n\"CB\",\n\"CHD\",\n\"CI\",\n\"XEC\",\n\"CINF\",\n\"CTAS\",\n\"CSCO\",\n\"C\",\n\"CFG\",\n\"CTXS\",\n\"CLX\",\n\"CME\",\n\"CMS\",\n\"KO\",\n\"CTSH\",\n\"CL\",\n\"CMCSA\",\n\"CMA\",\n\"CAG\",\n\"CXO\",\n\"COP\",\n\"ED\",\n\"STZ\",\n\"COO\",\n\"CPRT\",\n\"GLW\",\n\"COST\",\n\"COTY\",\n\"CCI\",\n\"CSX\",\n\"CMI\",\n\"CVS\",\n\"DHI\",\n\"DHR\",\n\"DRI\",\n\"DVA\",\n\"DE\",\n\"DAL\",\n\"XRAY\",\n\"DVN\",\n\"FANG\",\n\"DLR\",\n\"DFS\",\n\"DISCA\",\n\"DISCK\",\n\"DISH\",\n\"DG\",\n\"DLTR\",\n\"D\",\n\"DOV\",\n\"DOW\",\n\"DWDP\",\n\"DTE\",\n\"DRE\",\n\"DUK\",\n\"DXC\",\n\"ETFC\",\n\"EMN\",\n\"ETN\",\n\"EBAY\",\n\"ECL\",\n\"EIX\",\n\"EW\",\n\"EA\",\n\"EMR\",\n\"ETR\",\n\"EOG\",\n\"EFX\",\n\"EQIX\",\n\"EQR\",\n\"ESS\",\n\"EL\",\n\"EVRG\",\n\"ES\",\n\"RE\",\n\"EXC\",\n\"EXPE\",\n\"EXPD\",\n\"EXR\",\n\"XOM\",\n\"FFIV\",\n\"FB\",\n\"FAST\",\n\"FRT\",\n\"FDX\",\n\"FIS\",\n\"FITB\",\n\"FE\",\n\"FRC\",\n\"FISV\",\n\"FLT\",\n\"FLIR\",\n\"FLS\",\n\"FLR\",\n\"FMC\",\n\"FL\",\n\"F\",\n\"FTNT\",\n\"FTV\",\n\"FBHS\",\n\"BEN\",\n\"FCX\",\n\"GPS\",\n\"GRMN\",\n\"IT\",\n\"GD\",\n\"GE\",\n\"GIS\",\n\"GM\",\n\"GPC\",\n\"GILD\",\n\"GPN\",\n\"GS\",\n\"GWW\",\n\"HAL\",\n\"HBI\",\n\"HOG\",\n\"HRS\",\n\"HIG\",\n\"HAS\",\n\"HCA\",\n\"HCP\",\n\"HP\",\n\"HSIC\",\n\"HSY\",\n\"HES\",\n\"HPE\",\n\"HLT\",\n\"HFC\",\n\"HOLX\",\n\"HD\",\n\"HON\",\n\"HRL\",\n\"HST\",\n\"HPQ\",\n\"HUM\",\n\"HBAN\",\n\"HII\",\n\"IDXX\",\n\"INFO\",\n\"ITW\",\n\"ILMN\",\n\"IR\",\n\"INTC\",\n\"ICE\",\n\"IBM\",\n\"INCY\",\n\"IP\",\n\"IPG\",\n\"IFF\",\n\"INTU\",\n\"ISRG\",\n\"IVZ\",\n\"IPGP\",\n\"IQV\",\n\"IRM\",\n\"JKHY\",\n\"JEC\",\n\"JBHT\",\n\"JEF\",\n\"SJM\",\n\"JNJ\",\n\"JCI\",\n\"JPM\",\n\"JNPR\",\n\"KSU\",\n\"K\",\n\"KEY\",\n\"KEYS\",\n\"KMB\",\n\"KIM\",\n\"KMI\",\n\"KLAC\",\n\"KSS\",\n\"KHC\",\n\"KR\",\n\"LB\",\n\"LLL\",\n\"LH\",\n\"LRCX\",\n\"LW\",\n\"LEG\",\n\"LEN\",\n\"LLY\",\n\"LNC\",\n\"LIN\",\n\"LKQ\",\n\"LMT\",\n\"L\",\n\"LOW\",\n\"LYB\",\n\"MTB\",\n\"MAC\",\n\"M\",\n\"MRO\",\n\"MPC\",\n\"MAR\",\n\"MMC\",\n\"MLM\",\n\"MAS\",\n\"MA\",\n\"MAT\",\n\"MKC\",\n\"MXIM\",\n\"MCD\",\n\"MCK\",\n\"MDT\",\n\"MRK\",\n\"MET\",\n\"MTD\",\n\"MGM\",\n\"MCHP\",\n\"MU\",\n\"MSFT\",\n\"MAA\",\n\"MHK\",\n\"TAP\",\n\"MDLZ\",\n\"MNST\",\n\"MCO\",\n\"MS\",\n\"MOS\",\n\"MSI\",\n\"MSCI\",\n\"MYL\",\n\"NDAQ\",\n\"NOV\",\n\"NKTR\",\n\"NTAP\",\n\"NFLX\",\n\"NWL\",\n\"NEM\",\n\"NWSA\",\n\"NWS\",\n\"NEE\",\n\"NLSN\",\n\"NKE\",\n\"NI\",\n\"NBL\",\n\"JWN\",\n\"NSC\",\n\"NTRS\",\n\"NOC\",\n\"NCLH\",\n\"NRG\",\n\"NUE\",\n\"NVDA\",\n\"ORLY\",\n\"OXY\",\n\"OMC\",\n\"OKE\",\n\"ORCL\",\n\"PCAR\",\n\"PKG\",\n\"PH\",\n\"PAYX\",\n\"PYPL\",\n\"PNR\",\n\"PBCT\",\n\"PEP\",\n\"PKI\",\n\"PRGO\",\n\"PFE\",\n\"PM\",\n\"PSX\",\n\"PNW\",\n\"PXD\",\n\"PNC\",\n\"RL\",\n\"PPG\",\n\"PPL\",\n\"PFG\",\n\"PG\",\n\"PGR\",\n\"PLD\",\n\"PRU\",\n\"PEG\",\n\"PSA\",\n\"PHM\",\n\"PVH\",\n\"QRVO\",\n\"PWR\",\n\"QCOM\",\n\"DGX\",\n\"RJF\",\n\"RTN\",\n\"O\",\n\"RHT\",\n\"REG\",\n\"REGN\",\n\"RF\",\n\"RSG\",\n\"RMD\",\n\"RHI\",\n\"ROK\",\n\"ROL\",\n\"ROP\",\n\"ROST\",\n\"RCL\",\n\"CRM\",\n\"SBAC\",\n\"SLB\",\n\"STX\",\n\"SEE\",\n\"SRE\",\n\"SHW\",\n\"SPG\",\n\"SWKS\",\n\"SLG\",\n\"SNA\",\n\"SO\",\n\"LUV\",\n\"SPGI\",\n\"SWK\",\n\"SBUX\",\n\"STT\",\n\"SYK\",\n\"STI\",\n\"SIVB\",\n\"SYMC\",\n\"SYF\",\n\"SNPS\",\n\"SYY\",\n\"TROW\",\n\"TTWO\",\n\"TPR\",\n\"TGT\",\n\"TEL\",\n\"FTI\",\n\"TFX\",\n\"TXN\",\n\"TXT\",\n\"TMO\",\n\"TIF\",\n\"TWTR\",\n\"TJX\",\n\"TMK\",\n\"TSS\",\n\"TSCO\",\n\"TDG\",\n\"TRV\",\n\"TRIP\",\n\"FOXA\",\n\"FOX\",\n\"TSN\",\n\"UDR\",\n\"ULTA\",\n\"USB\",\n\"UAA\",\n\"UA\",\n\"UNP\",\n\"UAL\",\n\"UNH\",\n\"UPS\",\n\"URI\",\n\"UTX\",\n\"UHS\",\n\"UNM\",\n\"VFC\",\n\"VLO\",\n\"VAR\",\n\"VTR\",\n\"VRSN\",\n\"VRSK\",\n\"VZ\",\n\"VRTX\",\n\"VIAB\",\n\"V\",\n\"VNO\",\n\"VMC\",\n\"WAB\",\n\"WMT\",\n\"WBA\",\n\"DIS\",\n\"WM\",\n\"WAT\",\n\"WEC\",\n\"WCG\",\n\"WFC\",\n\"WELL\",\n\"WDC\",\n\"WU\",\n\"WRK\",\n\"WY\",\n\"WHR\",\n\"WMB\",\n\"WLTW\",\n\"WYNN\",\n\"XEL\",\n\"XRX\",\n\"XLNX\",\n\"XYL\",\n\"YUM\",\n\"ZBH\",\n\"ZION\",\n\"ZTS\"]);",
+        "inputs": {},
+        "outputs": {
+          "data": true
+        },
+        "id": 5,
+        "layer_id": 0,
+        "position": {
+          "left": 27,
+          "right": 190,
+          "top": 408
+        }
+      },
+      "14": {
+        "module": "js",
+        "name": "Score",
+        "require": "const _ = require(\"lodash\");\nconst math = require(\"mathjs\");",
+        "run": "const data = await inputs.data.take();\nconst positives = {};\nconst negatives = {};\nconst stocks = {positive: [], negative: []};\n_.forEach(data, ({ema, live}, symbol) => {\n  const lastClosingPrice = live[live.length - 1];\n  const lastEMAPrice = ema[ema.length - 1];\n  const diff = Math.round(lastClosingPrice - lastEMAPrice);\n  if (!live.length) {\n    return false;\n  }\n  const means = math.mean([live, ema], 1);\n  const meanTrend = Math.round(means[0] - means[1]);\n  if (diff > 1 && meanTrend > 0) {\n\t_.set(positives, [diff, symbol], {live, ema, diff})\n\tstocks.positive.push(symbol);\n  }\n  if (diff < -2 && lastClosingPrice <= 500 && meanTrend > 0) {\n    _.set(negatives, [diff, symbol], {live, ema, diff})\n    stocks.negative.push(symbol);\n  }\n})\n//console.log(positives);\noutputs.positive.put(positives)\noutputs.negative.put(negatives)\noutputs.combined.put({...positives, ...negatives});\noutputs.stocks.put(stocks);\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "positive": true,
+          "negative": true,
+          "combined": true,
+          "stocks": true
+        },
+        "id": 14,
+        "layer_id": 0,
+        "position": {
+          "left": 859,
+          "right": 979,
+          "top": 290
+        }
+      },
+      "17": {
+        "module": "js",
+        "name": "Closing Values",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const stocks = await inputs.data.take();\nconst closingData = {};\n_.forEach(stocks, (data, symbol) => {\n closingData[symbol] = _.map(data, 'c')\n});\noutputs.data.put(closingData);\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 17,
+        "layer_id": 0,
+        "position": {
+          "left": 399,
+          "right": 537,
+          "top": 394
+        }
+      },
+      "18": {
+        "module": "js",
+        "name": "Exponential Moving Average",
+        "require": "const _ = require(\"lodash\");",
+        "run": "function EMACalc(mArray,mRange) {\n  var k = 2/(mRange + 1);\n  // first item is just the same as the first item in the input\n  emaArray = [mArray[0]];\n  // for the rest of the items, they are computed with the previous one\n  for (var i = 1; i < mArray.length; i++) {\n    emaArray.push(mArray[i] * k + emaArray[i - 1] * (1 - k));\n  }\n  return emaArray;\n}\nconst data = await inputs.data.take();\nconst output = {};\n_.forEach(data, (closingPrices, symbol) => {\n\toutput[symbol] = {\n      live: closingPrices,\n      ema: EMACalc(closingPrices, 10)\n    }\n})\noutputs.data.put(output);",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 18,
+        "layer_id": 0,
+        "position": {
+          "left": 562,
+          "right": 798,
+          "top": 388
+        }
+      },
+      "19": {
+        "module": "list",
+        "name": "trending",
+        "inputs": {
+          "data": true
+        },
+        "id": 19,
+        "layer_id": 0,
+        "position": {
+          "left": 1605,
+          "right": 2013,
+          "top": 320
+        }
+      },
+      "20": {
+        "module": "list",
+        "name": "oversold",
+        "inputs": {
+          "data": true
+        },
+        "id": 20,
+        "layer_id": 0,
+        "position": {
+          "left": 1166,
+          "right": 1574,
+          "top": 324
+        }
+      },
+      "21": {
+        "module": "js",
+        "name": "getAccount",
+        "require": "",
+        "run": "const alpaca = await inputs.alpaca.take();\nalpaca.getAccount().then(outputs.data.put);",
+        "inputs": {
+          "alpaca": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 21,
+        "layer_id": 0,
+        "position": {
+          "left": 265,
+          "right": 383,
+          "top": 36
+        }
+      },
+      "22": {
+        "module": "js",
+        "name": "getPositions",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const alpaca = await inputs.alpaca.take();\nalpaca.getPositions().then(data => {\n  _.get(outputs, \"data.put\", ()=>{})(data)\n});",
+        "inputs": {
+          "alpaca": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 22,
+        "layer_id": 0,
+        "position": {
+          "left": 286,
+          "right": 408,
+          "top": 164
+        }
+      },
+      "23": {
+        "module": "js",
+        "name": "Initial Buy Orders",
+        "require": "const _ = require(\"lodash\")",
+        "run": "await inputs.noPositions.take();\nconst account = await inputs.account.take();\nconst scoredStocks = await inputs.data.take();\nconst buyingPower = account.buying_power;\nconst orders = {};\nlet totalValue = 0;\nlet safeValue = 0;\nwhile (totalValue <= buyingPower) {\n  _.forEach(scoredStocks, function(stocks, score) {\n      _.forEach(stocks, function(stock, symbol) {\n        totalValue += stock.live[stock.live.length - 1]\n        if (!orders[symbol]) {\n          orders[symbol] = {\n            symbol,\n            side: \"buy\",\n            qty: 0\n          };\n        }\n        if (totalValue <= buyingPower) {\n          safeValue = totalValue;\n          orders[symbol].qty += 1;  \n        }\n      });\n  });\n}\nconsole.log(totalValue, safeValue);\nconsole.log(orders);\noutputs.data.put(orders);",
+        "inputs": {
+          "data": true,
+          "noPositions": true,
+          "account": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 23,
+        "layer_id": 0,
+        "position": {
+          "left": 1370,
+          "right": 1526,
+          "top": 25
+        }
+      },
+      "24": {
+        "module": "js",
+        "name": "Market is open",
+        "require": "",
+        "run": "const data = await inputs.data.take();\nif (!outputs) return false;\noutputs[data.is_open].put(\"*\");",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 24,
+        "layer_id": 0,
+        "position": {
+          "left": 416,
+          "right": 557,
+          "top": 251
+        }
+      },
+      "25": {
+        "module": "js",
+        "name": "Has Positions",
+        "require": "const _ = require(\"lodash\")",
+        "run": "const data = await inputs.data.take();\nif (data.length) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data); \n}\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 25,
+        "layer_id": 0,
+        "position": {
+          "left": 459,
+          "right": 589,
+          "top": 156
+        }
+      },
+      "26": {
+        "module": "js",
+        "name": "Has Buying Power",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const data = await inputs.data.take();\nconst hasBuyingPower = parseInt(data.buying_power) > 0;\nif (hasBuyingPower) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data);\n}",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 26,
+        "layer_id": 0,
+        "position": {
+          "left": 451,
+          "right": 616,
+          "top": 28
+        }
+      },
+      "27": {
+        "module": "js",
+        "name": "Trade",
+        "require": "const _ = require(\"lodash\");\nconst alpaca = await inputs.alpaca.take();\n",
+        "run": "await inputs.noOpenOrders.take();\nconst data = await inputs.data.take();\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(console.log);\n})",
+        "inputs": {
+          "alpaca": true,
+          "data": true,
+          "noOpenOrders": true
+        },
+        "outputs": {},
+        "id": 27,
+        "layer_id": 0,
+        "position": {
+          "left": 1806,
+          "right": 1879,
+          "top": 137
+        }
+      },
+      "28": {
+        "module": "js",
+        "name": "Keep trending positions",
+        "require": "const _ = require(\"lodash\");",
+        "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  delete positions[symbol];\n});\nif (positions.length) {\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
+        "inputs": {
+          "positions": true,
+          "score": true
+        },
+        "outputs": {
+          "positions": true,
+          "noSells": true
+        },
+        "id": 28,
+        "layer_id": 0,
+        "position": {
+          "left": 1041,
+          "right": 1246,
+          "top": 216
+        }
+      },
+      "29": {
+        "module": "js",
+        "name": "Define sells",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const data = await inputs.data.take();\nconst orders = {};\n_.forEach(data, function(position, symbol) {\n  orders[symbol] = {\n    symbol,\n    side: \"sell\",\n    qty: position.qty\n  };\n});\noutputs.orders.put(orders);\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "orders": true
+        },
+        "id": 29,
+        "layer_id": 0,
+        "position": {
+          "left": 1385,
+          "right": 1501,
+          "top": 154
+        }
+      },
+      "30": {
+        "module": "js",
+        "name": "getOrders",
+        "require": "",
+        "run": "const alpaca = await inputs.alpaca.take();\nalpaca.getOrders().then(outputs.data.put);",
+        "inputs": {
+          "alpaca": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 30,
+        "layer_id": 0,
+        "position": {
+          "left": 269,
+          "right": 387,
+          "top": -47
+        }
+      },
+      "31": {
+        "module": "js",
+        "name": "Has Pending Orders",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const orders = await inputs.orders.take();\nif (orders.length) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data); \n}\n",
+        "inputs": {
+          "orders": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 31,
+        "layer_id": 0,
+        "position": {
+          "left": 442,
+          "right": 621,
+          "top": -44
+        }
+      },
+      "32": {
+        "module": "js",
+        "name": "Define buys",
+        "require": "const _ = require(\"lodash\");",
+        "run": "await inputs.noOrders.take();\nawait inputs.noSells.take();\nconst scoredStocks = await inputs.stocks.take();\nconst account = await inputs.hasBuyingPower.take();\nconst buyingPower = account.buying_power;\nconsole.log(\"To Buy:\", scoredStocks, \"Buying Power:\", buyingPower);\nlet orders = {};\nlet totalValue = 0;\nlet safeValue = 0;\nwhile (totalValue <= buyingPower) {\n  _.forEach(scoredStocks, function(stocks, score) {\n      _.forEach(stocks, function(stock, symbol) {\n        totalValue += stock.live[stock.live.length - 1]\n        if (!orders[symbol]) {\n          orders[symbol] = {\n            symbol,\n            side: \"buy\",\n            qty: 0\n          };\n        }\n        if (totalValue <= buyingPower) {\n          safeValue = totalValue;\n          orders[symbol].qty += 1;  \n        }\n      });\n  });\n}\norders = _.filter(orders, order => order.qty > 0);\nconsole.log(totalValue, safeValue);\nconsole.log(orders);\nif (orders.length) {\n  outputs.data.put(orders);  \n} else {\n  console.log(\"Not enough buying power\");\n}\n\n",
+        "inputs": {
+          "noOrders": true,
+          "hasBuyingPower": true,
+          "noSells": true,
+          "stocks": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 32,
+        "layer_id": 0,
+        "position": {
+          "left": 1399,
+          "right": 1519,
+          "top": 219
+        }
+      }
+    },
+    "packets": {},
+    "configuring": {
+      "module": "js",
+      "name": "Define buys",
+      "require": "const _ = require(\"lodash\");",
+      "run": "await inputs.noOrders.take();\nawait inputs.noSells.take();\nconst scoredStocks = await inputs.stocks.take();\nconst account = await inputs.hasBuyingPower.take();\nconst buyingPower = account.buying_power;\nconsole.log(\"To Buy:\", scoredStocks, \"Buying Power:\", buyingPower);\nlet orders = {};\nlet totalValue = 0;\nlet safeValue = 0;\nwhile (totalValue <= buyingPower) {\n  _.forEach(scoredStocks, function(stocks, score) {\n      _.forEach(stocks, function(stock, symbol) {\n        totalValue += stock.live[stock.live.length - 1]\n        if (!orders[symbol]) {\n          orders[symbol] = {\n            symbol,\n            side: \"buy\",\n            qty: 0\n          };\n        }\n        if (totalValue <= buyingPower) {\n          safeValue = totalValue;\n          orders[symbol].qty += 1;  \n        }\n      });\n  });\n}\norders = _.filter(orders, order => order.qty > 0);\nconsole.log(totalValue, safeValue);\nconsole.log(orders);\noutputs.data.put(orders);\n",
+      "inputs": {
+        "noOrders": true,
+        "hasBuyingPower": true,
+        "noSells": true,
+        "stocks": true
+      },
+      "outputs": {
+        "data": true
+      },
+      "id": 32,
+      "layer_id": 0,
+      "position": {
+        "left": 1399,
+        "right": 1519,
+        "top": 219
+      }
+    },
+    "addingLink": {},
+    "mouseOverPort": "",
+    "webview": {
+      "style": {
+        "width": "320px",
+        "height": "480px",
+        "left": "10px",
+        "top": "10px"
+      },
+      "src": ""
+    },
+    "problem": {},
+    "selectedLinks": {}
+  }
+]
