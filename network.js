@@ -1,3 +1,7 @@
+var dotenv = require("dotenv");
+dotenv.config({ path: ".env" });
+// Set any missing with defaults
+dotenv.config({ path: ".env.example" });
 var app = require("express")();
 var http = require("http").createServer(app);
 var io = require("socket.io")(http);
