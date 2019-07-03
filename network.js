@@ -1047,10 +1047,10 @@ data.map(layer => {
       });
       //console.log(positives);
       outputs.positive.put(positives);
-      outputs.negative.put(negatives);
+      //outputs.negative.put(negatives)
       outputs.combined.put({ ...positives, ...negatives });
       outputs.stocks.put(stocks);
-      outputs.neutral.put(neutral);
+      //outputs.neutral.put(neutral);
     } catch (e) {
       console.log(e);
       io.emit("problem:14", e);

@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": 236,
-      "y": 232
+      "x": -266,
+      "y": -93
     },
     "scale": 1,
     "links": {
@@ -543,7 +543,7 @@
         "module": "js",
         "name": "getBarset",
         "require": "",
-        "run": "await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
+        "run": "await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  console.log(responses);\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
         "inputs": {
           "alpaca": true,
           "timeframe": true,
@@ -599,7 +599,7 @@
         "module": "js",
         "name": "Score",
         "require": "const _ = require(\"lodash\");\nconst math = require(\"mathjs\");",
-        "run": "const data = await inputs.data.take();\nconst positives = {};\nconst negatives = {};\nconst neutral = {};\nconst stocks = {positive: [], negative: []};\n_.forEach(data, ({ema, live}, symbol) => {\n  if (!live.length) {\n    return true;\n  }\n  const lastClosingPrice = live[live.length - 1];\n  const lastEMAPrice = ema[ema.length - 1];\n  const diff = Math.round(lastClosingPrice - lastEMAPrice);\n  const means = math.mean([live, ema], 1);\n  const meanTrend = Math.round(means[0] - means[1]);\n  if (diff > 1 && meanTrend > 0) {\n\t_.set(positives, [diff, symbol], {live, ema, diff})\n\tstocks.positive.push(symbol);\n    return true;\n  }\n  if (diff < -2 && lastClosingPrice <= 500 && meanTrend > 0) {\n    _.set(negatives, [diff, symbol], {live, ema, diff})\n    stocks.negative.push(symbol);\n    return true;\n  }\n  neutral[symbol] = {live, ema, diff}\n})\n//console.log(positives);\noutputs.positive.put(positives)\noutputs.negative.put(negatives)\noutputs.combined.put({...positives, ...negatives});\noutputs.stocks.put(stocks);\noutputs.neutral.put(neutral);\n",
+        "run": "const data = await inputs.data.take();\nconst positives = {};\nconst negatives = {};\nconst neutral = {};\nconst stocks = {positive: [], negative: []};\n_.forEach(data, ({ema, live}, symbol) => {\n  if (!live.length) {\n    return true;\n  }\n  const lastClosingPrice = live[live.length - 1];\n  const lastEMAPrice = ema[ema.length - 1];\n  const diff = Math.round(lastClosingPrice - lastEMAPrice);\n  const means = math.mean([live, ema], 1);\n  const meanTrend = Math.round(means[0] - means[1]);\n  if (diff > 1 && meanTrend > 0) {\n\t_.set(positives, [diff, symbol], {live, ema, diff})\n\tstocks.positive.push(symbol);\n    return true;\n  }\n  if (diff < -2 && lastClosingPrice <= 500 && meanTrend > 0) {\n    _.set(negatives, [diff, symbol], {live, ema, diff})\n    stocks.negative.push(symbol);\n    return true;\n  }\n  neutral[symbol] = {live, ema, diff}\n})\n//console.log(positives);\noutputs.positive.put(positives)\n//outputs.negative.put(negatives)\noutputs.combined.put({...positives, ...negatives});\noutputs.stocks.put(stocks);\n//outputs.neutral.put(neutral);\n",
         "inputs": {
           "data": true
         },
@@ -745,9 +745,9 @@
         "id": 24,
         "layer_id": 0,
         "position": {
-          "left": 456,
-          "right": 595,
-          "top": 247
+          "left": 460,
+          "right": 599,
+          "top": 226
         }
       },
       "25": {
@@ -933,23 +933,25 @@
     "packets": {},
     "configuring": {
       "module": "js",
-      "name": "Alpaca",
-      "require": "const Alpaca = require('@alpacahq/alpaca-trade-api');",
-      "run": "await inputs.ping.take();\nconst alpaca = new Alpaca({\n  keyId: process.env.ALPACA_KEY,\n  secretKey: process.env.ALPACA_SECRET,\n  paper: true,\n})\noutputs.alpaca.put(alpaca);",
+      "name": "getBarset",
+      "require": "",
+      "run": "await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  console.log(responses);\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
       "inputs": {
-        "ping": true
+        "alpaca": true,
+        "timeframe": true,
+        "symbols": true,
+        "marketIsOpen": true
       },
       "outputs": {
-        "alpaca": true
+        "data": true
       },
-      "id": 1,
+      "id": 3,
       "layer_id": 0,
       "position": {
-        "left": 5,
-        "right": 210,
-        "top": -47
-      },
-      "symbol": "https://app.alpaca.markets/resources/images/logo-inverse-white-mobile.png"
+        "left": 722,
+        "right": 840,
+        "top": 380
+      }
     },
     "addingLink": {},
     "mouseOverPort": "",
