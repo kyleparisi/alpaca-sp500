@@ -48,7 +48,7 @@ const data = [
         target: { node: 17, port: "data" },
         id: 16,
         layer_id: 0,
-        logging: true
+        logging: false
       },
       "18": {
         direction: "->",
