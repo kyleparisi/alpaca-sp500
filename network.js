@@ -265,13 +265,6 @@ const data = [
         id: 64,
         layer_id: 0
       },
-      "65": {
-        direction: "->",
-        source: { node: 24, port: "true" },
-        target: { node: 3, port: "marketIsOpen" },
-        id: 65,
-        layer_id: 0
-      },
       "66": {
         direction: "->",
         source: { node: 33, port: "ping" },
@@ -432,7 +425,6 @@ data.map(layer => {
   let running = true;
   while (running) {
     try {
-      await inputs.marketIsOpen.take();
       const alpaca = await inputs.alpaca.take();
       const timeframe = await inputs.timeframe.take();
       const symbols = await inputs.symbols.take();
@@ -454,6 +446,7 @@ data.map(layer => {
 
       Promise.all([promise1, promise2, promise3])
         .then(responses => {
+          console.log(responses);
           return responses.reduce(function(result, current) {
             return Object.assign(result, current);
           }, {});
