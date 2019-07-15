@@ -30,10 +30,10 @@
       "height": 315
     },
     "pan": {
-      "x": 9,
-      "y": 134
+      "x": -44,
+      "y": 202
     },
-    "scale": 1,
+    "scale": 0.74,
     "links": {
       "0": {
         "direction": "->",
@@ -75,7 +75,7 @@
         },
         "id": 16,
         "layer_id": 0,
-        "logging": false
+        "logging": true
       },
       "18": {
         "direction": "->",
@@ -529,8 +529,8 @@
       "3": {
         "module": "js",
         "name": "getBarset",
-        "require": "",
-        "run": "const alpaca = await inputs.alpaca.take();\nconst timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  console.log(responses);\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
+        "require": "const timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  console.log(responses);\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
         "inputs": {
           "alpaca": true,
           "timeframe": true,
@@ -918,26 +918,7 @@
       }
     },
     "packets": {},
-    "configuring": {
-      "module": "js",
-      "name": "getOrders",
-      "require": "",
-      "run": "await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getOrders().then(outputs.data.put);",
-      "inputs": {
-        "alpaca": true,
-        "marketIsOpen": true
-      },
-      "outputs": {
-        "data": true
-      },
-      "id": 30,
-      "layer_id": 0,
-      "position": {
-        "left": 745,
-        "right": 850,
-        "top": -41
-      }
-    },
+    "configuring": {},
     "addingLink": {},
     "mouseOverPort": "",
     "webview": {

@@ -48,7 +48,7 @@ const data = [
         target: { node: 17, port: "data" },
         id: 16,
         layer_id: 0,
-        logging: false
+        logging: true
       },
       "18": {
         direction: "->",
@@ -421,13 +421,12 @@ data.map(layer => {
   console.log("Making node", 3);
   const inputs = engine.inputs["3"];
   const outputs = engine.outputs["3"];
-
+  const timeframe = await inputs.timeframe.take();
+  const symbols = await inputs.symbols.take();
   let running = true;
   while (running) {
     try {
       const alpaca = await inputs.alpaca.take();
-      const timeframe = await inputs.timeframe.take();
-      const symbols = await inputs.symbols.take();
       const group1 = symbols.slice(0, 199);
       const group2 = symbols.slice(200, 399);
       const group3 = symbols.slice(400, 505);
