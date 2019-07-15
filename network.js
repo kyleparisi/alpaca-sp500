@@ -445,7 +445,6 @@ data.map(layer => {
 
       Promise.all([promise1, promise2, promise3])
         .then(responses => {
-          console.log(responses);
           return responses.reduce(function(result, current) {
             return Object.assign(result, current);
           }, {});
