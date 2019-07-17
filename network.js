@@ -276,7 +276,8 @@ const data = [
         id: 66,
         layer_id: 0
       }
-    }
+    },
+    throttle: 10
   }
 ];
 const Channel = function() {
