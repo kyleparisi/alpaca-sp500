@@ -1413,7 +1413,7 @@ data.map(layer => {
       setTimeout(() => {
         outputs.ping.put("*");
         ping();
-      }, 5000);
+      }, 30000);
     }
     outputs.ping.put("*");
     ping();
