@@ -7,6 +7,10 @@ var http = require("http").createServer(app);
 var io = require("socket.io")(http);
 var fs = require("fs");
 
+async function Sleep(duration) {
+  return new Promise(resolve => setTimeout(resolve, duration));
+}
+
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
@@ -330,6 +334,7 @@ data.map(layer => {
           console.log(outputData);
         }
         io.emit("packet:" + link_id, outputData);
+        await Sleep(layer.throttle * 1000 || 0);
         input.put(outputData);
         leftToRightmiddleware.call(this).catch(() => {});
       }
