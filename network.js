@@ -255,20 +255,6 @@ const data = [
         id: 52,
         layer_id: 0
       },
-      "62": {
-        direction: "->",
-        source: { node: 24, port: "true" },
-        target: { node: 30, port: "marketIsOpen" },
-        id: 62,
-        layer_id: 0
-      },
-      "64": {
-        direction: "->",
-        source: { node: 24, port: "true" },
-        target: { node: 22, port: "marketIsOpen" },
-        id: 64,
-        layer_id: 0
-      },
       "66": {
         direction: "->",
         source: { node: 33, port: "ping" },
@@ -1131,7 +1117,7 @@ data.map(layer => {
   let running = true;
   while (running) {
     try {
-      await inputs.marketIsOpen.take();
+      //await inputs.marketIsOpen.take();
       const alpaca = await inputs.alpaca.take();
       alpaca.getPositions().then(data => {
         _.get(outputs, "data.put", () => {})(data);
@@ -1331,7 +1317,7 @@ data.map(layer => {
   let running = true;
   while (running) {
     try {
-      await inputs.marketIsOpen.take();
+      //await inputs.marketIsOpen.take();
       const alpaca = await inputs.alpaca.take();
       alpaca.getOrders().then(outputs.data.put);
     } catch (e) {

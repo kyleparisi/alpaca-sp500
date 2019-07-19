@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": -44,
-      "y": 202
+      "x": -52,
+      "y": 213
     },
     "throttle": 10,
     "scale": 0.74,
@@ -447,32 +447,6 @@
         "id": 52,
         "layer_id": 0
       },
-      "62": {
-        "direction": "->",
-        "source": {
-          "node": 24,
-          "port": "true"
-        },
-        "target": {
-          "node": 30,
-          "port": "marketIsOpen"
-        },
-        "id": 62,
-        "layer_id": 0
-      },
-      "64": {
-        "direction": "->",
-        "source": {
-          "node": 24,
-          "port": "true"
-        },
-        "target": {
-          "node": 22,
-          "port": "marketIsOpen"
-        },
-        "id": 64,
-        "layer_id": 0
-      },
       "66": {
         "direction": "->",
         "source": {
@@ -681,7 +655,7 @@
         "module": "js",
         "name": "getPositions",
         "require": "const _ = require(\"lodash\");",
-        "run": "await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getPositions().then(data => {\n  _.get(outputs, \"data.put\", ()=>{})(data)\n});",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getPositions().then(data => {\n  _.get(outputs, \"data.put\", ()=>{})(data)\n});",
         "inputs": {
           "alpaca": true,
           "marketIsOpen": true
@@ -842,7 +816,7 @@
         "module": "js",
         "name": "getOrders",
         "require": "",
-        "run": "await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getOrders().then(outputs.data.put);",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getOrders().then(outputs.data.put);",
         "inputs": {
           "alpaca": true,
           "marketIsOpen": true
@@ -919,23 +893,7 @@
       }
     },
     "packets": {},
-    "configuring": {
-      "module": "js",
-      "name": "js",
-      "require": "",
-      "run": "function ping() {\n  setTimeout(() => {\n    outputs.ping.put(\"*\");\n    ping();\n  }, 30000);\n}\noutputs.ping.put(\"*\");\nping();\n\n\n",
-      "inputs": {},
-      "outputs": {
-        "ping": true
-      },
-      "position": {
-        "left": -209,
-        "right": -89,
-        "top": -42
-      },
-      "id": 33,
-      "layer_id": 0
-    },
+    "configuring": {},
     "addingLink": {},
     "mouseOverPort": "",
     "webview": {
