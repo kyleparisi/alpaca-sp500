@@ -30,10 +30,10 @@
       "height": 315
     },
     "pan": {
-      "x": -52,
-      "y": 213
+      "x": -253,
+      "y": 70
     },
-    "throttle": 10,
+    "throttle": 5,
     "scale": 0.74,
     "links": {
       "0": {
@@ -756,7 +756,7 @@
         "module": "js",
         "name": "Trade",
         "require": "const _ = require(\"lodash\");\nconst alpaca = await inputs.alpaca.take();\n",
-        "run": "await inputs.noOpenOrders.take();\nconst data = await inputs.data.take();\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(console.log);\n})",
+        "run": "await inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(console.log);\n})",
         "inputs": {
           "alpaca": true,
           "data": true,
@@ -775,7 +775,7 @@
         "module": "js",
         "name": "Keep trending positions",
         "require": "const _ = require(\"lodash\");",
-        "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  console.log(\"removing positive position\", symbol);\n  delete positions[symbol];\n});\nif (Object.keys(positions).length) {\n  console.log(\"sell positions\", positions);\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
+        "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  console.log(\"removing positive position\", symbol);\n  delete positions[symbol];\n});\nif (Object.keys(positions).length) {\n  console.log(\"sell positions\", JSON.stringify(positions));\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
         "inputs": {
           "positions": true,
           "score": true

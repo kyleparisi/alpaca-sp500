@@ -263,7 +263,7 @@ const data = [
         layer_id: 0
       }
     },
-    throttle: 10
+    throttle: 5
   }
 ];
 const Channel = function() {
@@ -282,7 +282,7 @@ const Channel = function() {
           // no puts ready (might happen downstream)
           let ref;
           const prom = new Promise(resolve => (ref = resolve));
-          obj.takes.push(ref);
+          obj.takes.splice(0, 1, ref);
           return () => prom;
         }
         if (prop === "put") {
@@ -292,7 +292,7 @@ const Channel = function() {
           }
           // no takes ready (might happen downstream);
           const fn = data => {
-            obj.puts.push(new Promise(resolve => resolve(data)));
+            obj.puts.splice(0, 1, new Promise(resolve => resolve(data)));
           };
           return fn;
         }
@@ -1241,7 +1241,9 @@ data.map(layer => {
   while (running) {
     try {
       await inputs.noOpenOrders.take();
+      console.log("no orders");
       const data = await inputs.data.take();
+      console.log("data to trade", JSON.stringify(data));
       _.forEach(data, function(order) {
         order.type = "market";
         order.time_in_force = "day";
@@ -1273,7 +1275,7 @@ data.map(layer => {
         delete positions[symbol];
       });
       if (Object.keys(positions).length) {
-        console.log("sell positions", positions);
+        console.log("sell positions", JSON.stringify(positions));
         outputs.positions.put(positions);
       } else {
         outputs.noSells.put("*");
