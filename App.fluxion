@@ -755,8 +755,8 @@
       "27": {
         "module": "js",
         "name": "Trade",
-        "require": "const _ = require(\"lodash\");\nconst alpaca = await inputs.alpaca.take();\n",
-        "run": "await inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
+        "require": "const _ = require(\"lodash\");\n",
+        "run": "const alpaca = await inputs.alpaca.take();\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
         "inputs": {
           "alpaca": true,
           "data": true,

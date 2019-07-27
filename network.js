@@ -1235,11 +1235,11 @@ data.map(layer => {
   const inputs = engine.inputs["27"];
   const outputs = engine.outputs["27"];
   const _ = require("lodash");
-  const alpaca = await inputs.alpaca.take();
 
   let running = true;
   while (running) {
     try {
+      const alpaca = await inputs.alpaca.take();
       await inputs.noOpenOrders.take();
       console.log("no orders");
       const data = await inputs.data.take();
