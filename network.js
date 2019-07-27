@@ -1251,7 +1251,7 @@ data.map(layer => {
         alpaca
           .createOrder(order)
           .then(console.log)
-          .catch(console.log);
+          .catch(e => console.log(e.message));
       });
     } catch (e) {
       console.log(e);

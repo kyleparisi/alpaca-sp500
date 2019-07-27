@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": -253,
-      "y": 70
+      "x": -786,
+      "y": 69
     },
     "throttle": 5,
     "scale": 0.74,
@@ -756,7 +756,7 @@
         "module": "js",
         "name": "Trade",
         "require": "const _ = require(\"lodash\");\nconst alpaca = await inputs.alpaca.take();\n",
-        "run": "await inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(console.log);\n})",
+        "run": "await inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
         "inputs": {
           "alpaca": true,
           "data": true,
@@ -766,9 +766,9 @@
         "id": 27,
         "layer_id": 0,
         "position": {
-          "left": 2141,
-          "right": 2259,
-          "top": 148
+          "left": 2187,
+          "right": 2274,
+          "top": 123
         }
       },
       "28": {
@@ -893,7 +893,25 @@
       }
     },
     "packets": {},
-    "configuring": {},
+    "configuring": {
+      "module": "js",
+      "name": "Trade",
+      "require": "const _ = require(\"lodash\");\nconst alpaca = await inputs.alpaca.take();\n",
+      "run": "await inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
+      "inputs": {
+        "alpaca": true,
+        "data": true,
+        "noOpenOrders": true
+      },
+      "outputs": {},
+      "id": 27,
+      "layer_id": 0,
+      "position": {
+        "left": 2187,
+        "right": 2274,
+        "top": 123
+      }
+    },
     "addingLink": {},
     "mouseOverPort": "",
     "webview": {
