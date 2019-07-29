@@ -442,7 +442,6 @@ data.map(layer => {
         return Object.assign(result, current);
       },
       {});
-      console.log(merge);
       if (outputs.data) {
         outputs.data.put(merge);
       }
