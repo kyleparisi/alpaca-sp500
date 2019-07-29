@@ -263,7 +263,7 @@ const data = [
         layer_id: 0
       }
     },
-    throttle: 5
+    throttle: 2
   }
 ];
 const Channel = function() {
@@ -402,7 +402,8 @@ data.map(layer => {
   while (running) {
     try {
       const alpaca = await inputs.alpaca.take();
-      alpaca.getClock().then(outputs.data.put);
+      const clock = await alpaca.getClock();
+      outputs.data.put(clock);
     } catch (e) {
       console.log(e);
       io.emit("problem:2", e);
@@ -422,26 +423,29 @@ data.map(layer => {
       const group1 = symbols.slice(0, 199);
       const group2 = symbols.slice(200, 399);
       const group3 = symbols.slice(400, 505);
-      const promise1 = alpaca.getBars("day", group1, {
+      const promise1 = await alpaca.getBars("day", group1, {
         limit: 50,
         ...timeframe
       });
-      const promise2 = alpaca.getBars("day", group2, {
+      const promise2 = await alpaca.getBars("day", group2, {
         limit: 50,
         ...timeframe
       });
-      const promise3 = alpaca.getBars("day", group3, {
+      const promise3 = await alpaca.getBars("day", group3, {
         limit: 50,
         ...timeframe
       });
-
-      Promise.all([promise1, promise2, promise3])
-        .then(responses => {
-          return responses.reduce(function(result, current) {
-            return Object.assign(result, current);
-          }, {});
-        })
-        .then(outputs.data.put);
+      const merge = [promise1, promise2, promise3].reduce(function(
+        result,
+        current
+      ) {
+        return Object.assign(result, current);
+      },
+      {});
+      console.log(merge);
+      if (outputs.data) {
+        outputs.data.put(merge);
+      }
     } catch (e) {
       console.log(e);
       io.emit("problem:3", e);
@@ -1097,12 +1101,13 @@ data.map(layer => {
   console.log("Making node", 21);
   const inputs = engine.inputs["21"];
   const outputs = engine.outputs["21"];
-
+  const _ = require("lodash");
   let running = true;
   while (running) {
     try {
       const alpaca = await inputs.alpaca.take();
-      alpaca.getAccount().then(outputs.data.put);
+      const account = alpaca.getAccount();
+      _.get(outputs, "data.put", () => {})(account);
     } catch (e) {
       console.log(e);
       io.emit("problem:21", e);
@@ -1119,9 +1124,8 @@ data.map(layer => {
     try {
       //await inputs.marketIsOpen.take();
       const alpaca = await inputs.alpaca.take();
-      alpaca.getPositions().then(data => {
-        _.get(outputs, "data.put", () => {})(data);
-      });
+      const positions = await alpaca.getPositions();
+      _.get(outputs, "data.put", () => {})(positions);
     } catch (e) {
       console.log(e);
       io.emit("problem:22", e);
@@ -1321,7 +1325,8 @@ data.map(layer => {
     try {
       //await inputs.marketIsOpen.take();
       const alpaca = await inputs.alpaca.take();
-      alpaca.getOrders().then(outputs.data.put);
+      const orders = alpaca.getOrders();
+      outputs.data.put(orders);
     } catch (e) {
       console.log(e);
       io.emit("problem:30", e);

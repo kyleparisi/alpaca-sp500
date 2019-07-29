@@ -30,10 +30,10 @@
       "height": 315
     },
     "pan": {
-      "x": -786,
-      "y": 69
+      "x": -387,
+      "y": 100
     },
-    "throttle": 5,
+    "throttle": 2,
     "scale": 0.74,
     "links": {
       "0": {
@@ -486,7 +486,7 @@
         "module": "js",
         "name": "getClock",
         "require": "",
-        "run": "const alpaca = await inputs.alpaca.take();\nalpaca.getClock().then(outputs.data.put);",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst clock = await alpaca.getClock();\noutputs.data.put(clock);",
         "inputs": {
           "alpaca": true
         },
@@ -505,7 +505,7 @@
         "module": "js",
         "name": "getBarset",
         "require": "const timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();",
-        "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = alpaca.getBars('day', group3, { limit: 50, ...timeframe });\n\nPromise.all([promise1, promise2, promise3]).then(responses => {\n  return responses.reduce(function(result, current) {\n    return Object.assign(result, current);\n  }, {})\n}).then(outputs.data.put);\n",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = await alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = await alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = await alpaca.getBars('day', group3, { limit: 50, ...timeframe });\nconst merge = [promise1, promise2, promise3].reduce(function(result, current) {\n  return Object.assign(result, current);\n}, {});\nconsole.log(merge)\nif (outputs.data) {\n  outputs.data.put(merge);\n}\n\n",
         "inputs": {
           "alpaca": true,
           "timeframe": true,
@@ -635,8 +635,8 @@
       "21": {
         "module": "js",
         "name": "getAccount",
-        "require": "",
-        "run": "const alpaca = await inputs.alpaca.take();\nalpaca.getAccount().then(outputs.data.put);",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst account = alpaca.getAccount();\n_.get(outputs, \"data.put\", ()=>{})(account);",
         "inputs": {
           "alpaca": true
         },
@@ -655,7 +655,7 @@
         "module": "js",
         "name": "getPositions",
         "require": "const _ = require(\"lodash\");",
-        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getPositions().then(data => {\n  _.get(outputs, \"data.put\", ()=>{})(data)\n});",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst positions = await alpaca.getPositions();\n_.get(outputs, \"data.put\", ()=>{})(positions)\n",
         "inputs": {
           "alpaca": true,
           "marketIsOpen": true
@@ -816,7 +816,7 @@
         "module": "js",
         "name": "getOrders",
         "require": "",
-        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nalpaca.getOrders().then(outputs.data.put);",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst orders = alpaca.getOrders();\noutputs.data.put(orders);\n",
         "inputs": {
           "alpaca": true,
           "marketIsOpen": true
@@ -896,8 +896,8 @@
     "configuring": {
       "module": "js",
       "name": "Trade",
-      "require": "const _ = require(\"lodash\");\nconst alpaca = await inputs.alpaca.take();\n",
-      "run": "await inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
+      "require": "const _ = require(\"lodash\");\n",
+      "run": "const alpaca = await inputs.alpaca.take();\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
       "inputs": {
         "alpaca": true,
         "data": true,
