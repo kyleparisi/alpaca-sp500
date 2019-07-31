@@ -30,11 +30,11 @@
       "height": 315
     },
     "pan": {
-      "x": -266,
-      "y": 101
+      "x": -993,
+      "y": 105
     },
     "throttle": 2,
-    "scale": 0.74,
+    "scale": 1,
     "links": {
       "0": {
         "direction": "->",
@@ -250,19 +250,6 @@
         "layer_id": 0,
         "logging": false
       },
-      "34": {
-        "direction": "->",
-        "source": {
-          "node": 1,
-          "port": "alpaca"
-        },
-        "target": {
-          "node": 27,
-          "port": "alpaca"
-        },
-        "id": 34,
-        "layer_id": 0
-      },
       "35": {
         "direction": "->",
         "source": {
@@ -458,6 +445,19 @@
           "port": "ping"
         },
         "id": 66,
+        "layer_id": 0
+      },
+      "67": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 27,
+          "port": "alpaca"
+        },
+        "id": 67,
         "layer_id": 0
       }
     },
@@ -756,7 +756,7 @@
         "module": "js",
         "name": "Trade",
         "require": "const _ = require(\"lodash\");\n",
-        "run": "const alpaca = await inputs.alpaca.take();\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
+        "run": "const alpaca = await inputs.alpaca.take();\nconsole.log(\"alpaca\");\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
         "inputs": {
           "alpaca": true,
           "data": true,
@@ -895,24 +895,21 @@
     "packets": {},
     "configuring": {
       "module": "js",
-      "name": "getBarset",
-      "require": "const timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();",
-      "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconst promise1 = await alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = await alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = await alpaca.getBars('day', group3, { limit: 50, ...timeframe });\nconst merge = [promise1, promise2, promise3].reduce(function(result, current) {\n  return Object.assign(result, current);\n}, {});\nif (outputs.data) {\n  outputs.data.put(merge);\n}\n\n",
+      "name": "Trade",
+      "require": "const _ = require(\"lodash\");\n",
+      "run": "const alpaca = await inputs.alpaca.take();\nconsole.log(\"alpaca\");\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
       "inputs": {
         "alpaca": true,
-        "timeframe": true,
-        "symbols": true,
-        "marketIsOpen": true
+        "data": true,
+        "noOpenOrders": true
       },
-      "outputs": {
-        "data": true
-      },
-      "id": 3,
+      "outputs": {},
+      "id": 27,
       "layer_id": 0,
       "position": {
-        "left": 722,
-        "right": 840,
-        "top": 380
+        "left": 2187,
+        "right": 2274,
+        "top": 123
       }
     },
     "addingLink": {},

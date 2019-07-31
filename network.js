@@ -148,13 +148,6 @@ const data = [
         layer_id: 0,
         logging: false
       },
-      "34": {
-        direction: "->",
-        source: { node: 1, port: "alpaca" },
-        target: { node: 27, port: "alpaca" },
-        id: 34,
-        layer_id: 0
-      },
       "35": {
         direction: "->",
         source: { node: 23, port: "data" },
@@ -260,6 +253,13 @@ const data = [
         source: { node: 33, port: "ping" },
         target: { node: 1, port: "ping" },
         id: 66,
+        layer_id: 0
+      },
+      "67": {
+        direction: "->",
+        source: { node: 1, port: "alpaca" },
+        target: { node: 27, port: "alpaca" },
+        id: 67,
         layer_id: 0
       }
     },
@@ -1243,6 +1243,7 @@ data.map(layer => {
   while (running) {
     try {
       const alpaca = await inputs.alpaca.take();
+      console.log("alpaca");
       await inputs.noOpenOrders.take();
       console.log("no orders");
       const data = await inputs.data.take();
