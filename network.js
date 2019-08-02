@@ -1105,7 +1105,7 @@ data.map(layer => {
   while (running) {
     try {
       const alpaca = await inputs.alpaca.take();
-      const account = alpaca.getAccount();
+      const account = await alpaca.getAccount();
       _.get(outputs, "data.put", () => {})(account);
     } catch (e) {
       console.log(e);
@@ -1325,7 +1325,7 @@ data.map(layer => {
     try {
       //await inputs.marketIsOpen.take();
       const alpaca = await inputs.alpaca.take();
-      const orders = alpaca.getOrders();
+      const orders = await alpaca.getOrders();
       outputs.data.put(orders);
     } catch (e) {
       console.log(e);

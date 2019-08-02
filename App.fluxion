@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": -993,
-      "y": 105
+      "x": -81,
+      "y": 184
     },
     "throttle": 2,
     "scale": 1,
@@ -636,7 +636,7 @@
         "module": "js",
         "name": "getAccount",
         "require": "const _ = require(\"lodash\");",
-        "run": "const alpaca = await inputs.alpaca.take();\nconst account = alpaca.getAccount();\n_.get(outputs, \"data.put\", ()=>{})(account);",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst account = await alpaca.getAccount();\n_.get(outputs, \"data.put\", ()=>{})(account);",
         "inputs": {
           "alpaca": true
         },
@@ -816,7 +816,7 @@
         "module": "js",
         "name": "getOrders",
         "require": "",
-        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst orders = alpaca.getOrders();\noutputs.data.put(orders);\n",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst orders = await alpaca.getOrders();\noutputs.data.put(orders);\n",
         "inputs": {
           "alpaca": true,
           "marketIsOpen": true
@@ -895,21 +895,21 @@
     "packets": {},
     "configuring": {
       "module": "js",
-      "name": "Trade",
-      "require": "const _ = require(\"lodash\");\n",
-      "run": "const alpaca = await inputs.alpaca.take();\nconsole.log(\"alpaca\");\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
+      "name": "getAccount",
+      "require": "const _ = require(\"lodash\");",
+      "run": "const alpaca = await inputs.alpaca.take();\nconst account = await alpaca.getAccount();\n_.get(outputs, \"data.put\", ()=>{})(account);",
       "inputs": {
-        "alpaca": true,
-        "data": true,
-        "noOpenOrders": true
+        "alpaca": true
       },
-      "outputs": {},
-      "id": 27,
+      "outputs": {
+        "data": true
+      },
+      "id": 21,
       "layer_id": 0,
       "position": {
-        "left": 2187,
-        "right": 2274,
-        "top": 123
+        "left": 746,
+        "right": 864,
+        "top": 94
       }
     },
     "addingLink": {},
