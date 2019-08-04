@@ -423,6 +423,7 @@ data.map(layer => {
       const group1 = symbols.slice(0, 199);
       const group2 = symbols.slice(200, 399);
       const group3 = symbols.slice(400, 505);
+      console.log("Get bars");
       const promise1 = await alpaca.getBars("day", group1, {
         limit: 50,
         ...timeframe
@@ -435,6 +436,7 @@ data.map(layer => {
         limit: 50,
         ...timeframe
       });
+      console.log("Got bars");
       const merge = [promise1, promise2, promise3].reduce(function(
         result,
         current
