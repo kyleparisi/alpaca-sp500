@@ -322,7 +322,7 @@ data.map(layer => {
         }
         io.emit("packet:" + link_id, outputData);
         await Sleep(layer.throttle * 1000 || 0);
-        input.put(outputData);
+        engine.inputs[target.node][target.port].put(outputData);
         leftToRightmiddleware.call(this).catch(() => {});
       }
       leftToRightmiddleware.call(this).catch(console.log);
