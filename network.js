@@ -353,17 +353,8 @@ data.map(layer => {
       typeof engine.inputs[target.node] !== "undefined" &&
       typeof engine.inputs[target.node][target.port] !== "undefined"
     ) {
-      const newChannel = new Channel();
-      const originalChannel = engine.inputs[target.node][target.port];
-      engine.inputs[target.node][target.port] = newChannel;
-      (async () => {
-        const data = await originalChannel.take();
-        engine.inputs[target.node][target.port].put(data);
-      })();
-      (async () => {
-        const data = await input.take();
-        engine.inputs[target.node][target.port].put(data);
-      })();
+      // merge channels
+      // Do nothing?
     } else {
       // new channel
       engine.inputs[target.node] = engine.inputs[target.node] || {};
@@ -423,7 +414,6 @@ data.map(layer => {
       const group1 = symbols.slice(0, 199);
       const group2 = symbols.slice(200, 399);
       const group3 = symbols.slice(400, 505);
-      console.log("Get bars");
       const promise1 = await alpaca.getBars("day", group1, {
         limit: 50,
         ...timeframe
@@ -436,7 +426,6 @@ data.map(layer => {
         limit: 50,
         ...timeframe
       });
-      console.log("Got bars");
       const merge = [promise1, promise2, promise3].reduce(function(
         result,
         current
