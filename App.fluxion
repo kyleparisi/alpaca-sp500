@@ -775,7 +775,7 @@
         "module": "js",
         "name": "Keep trending positions",
         "require": "const _ = require(\"lodash\");",
-        "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  console.log(\"removing positive position\", symbol);\n  delete positions[symbol];\n});\nif (Object.keys(positions).length) {\n  console.log(\"sell positions\", JSON.stringify(positions));\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
+        "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  console.log(\"removing positive position\", symbol);\n  delete positions[symbol];\n});\nif (Object.keys(positions).length) {\n  console.log(\"sell positions\");\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
         "inputs": {
           "positions": true,
           "score": true

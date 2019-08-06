@@ -1270,7 +1270,7 @@ data.map(layer => {
         delete positions[symbol];
       });
       if (Object.keys(positions).length) {
-        console.log("sell positions", JSON.stringify(positions));
+        console.log("sell positions");
         outputs.positions.put(positions);
       } else {
         outputs.noSells.put("*");
