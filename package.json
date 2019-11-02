@@ -20,7 +20,7 @@
     "@alpacahq/alpaca-trade-api": "^1.1.0",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "mathjs": "^6.0.2",
     "moment": "^2.24.0",
     "prettier": "^1.18.2",
