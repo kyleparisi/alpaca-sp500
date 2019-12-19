@@ -1017,7 +1017,7 @@ data.map(layer => {
           stocks.positive.push(symbol);
           return true;
         }
-        if (diff < -2 && lastClosingPrice <= 500 && meanTrend > 0) {
+        if (diff < -0.5 && lastClosingPrice <= 500 && meanTrend > 0) {
           _.set(negatives, [diff, symbol], { live, ema, diff });
           stocks.negative.push(symbol);
           return true;
