@@ -1,0 +1,1234 @@
+[
+  {
+    "app": {
+      "style": {
+        "width": "100%",
+        "height": "100%",
+        "transition": "transform 0.2s"
+      },
+      "svgStyle": {
+        "width": "100%",
+        "height": "100vh",
+        "overflow": "visible",
+        "transition": "transform 0.2s"
+      },
+      "linkStyle": {
+        "strokeWidth": 1,
+        "strokeLinejoin": "round",
+        "strokeLinecap": "round",
+        "fill": "none"
+      },
+      "linkOverlapStyle": {
+        "strokeWidth": 50,
+        "strokeLinejoin": "round",
+        "strokeLinecap": "round",
+        "fill": "none",
+        "stroke": "rgba(230, 230, 230, 0)"
+      }
+    },
+    "editor": {
+      "height": 315
+    },
+    "pan": {
+      "x": -790,
+      "y": 13
+    },
+    "throttle": 2,
+    "scale": 1,
+    "links": {
+      "0": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 2,
+          "port": "alpaca"
+        },
+        "id": 0,
+        "layer_id": 0,
+        "logging": false
+      },
+      "8": {
+        "direction": "->",
+        "source": {
+          "node": 18,
+          "port": "data"
+        },
+        "target": {
+          "node": 14,
+          "port": "data"
+        },
+        "id": 8,
+        "layer_id": 0,
+        "logging": false
+      },
+      "16": {
+        "direction": "->",
+        "source": {
+          "node": 3,
+          "port": "data"
+        },
+        "target": {
+          "node": 17,
+          "port": "data"
+        },
+        "id": 16,
+        "layer_id": 0,
+        "logging": false
+      },
+      "18": {
+        "direction": "->",
+        "source": {
+          "node": 17,
+          "port": "data"
+        },
+        "target": {
+          "node": 18,
+          "port": "data"
+        },
+        "id": 18,
+        "layer_id": 0
+      },
+      "20": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "positive"
+        },
+        "target": {
+          "node": 19,
+          "port": "data"
+        },
+        "id": 20,
+        "layer_id": 0
+      },
+      "21": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 21,
+          "port": "alpaca"
+        },
+        "id": 21,
+        "layer_id": 0
+      },
+      "22": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 22,
+          "port": "alpaca"
+        },
+        "id": 22,
+        "layer_id": 0
+      },
+      "23": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 3,
+          "port": "alpaca"
+        },
+        "id": 23,
+        "layer_id": 0
+      },
+      "24": {
+        "direction": "->",
+        "source": {
+          "node": 4,
+          "port": "data"
+        },
+        "target": {
+          "node": 3,
+          "port": "timeframe"
+        },
+        "id": 24,
+        "layer_id": 0
+      },
+      "27": {
+        "direction": "->",
+        "source": {
+          "node": 2,
+          "port": "data"
+        },
+        "target": {
+          "node": 24,
+          "port": "data"
+        },
+        "id": 27,
+        "layer_id": 0
+      },
+      "28": {
+        "direction": "->",
+        "source": {
+          "node": 22,
+          "port": "data"
+        },
+        "target": {
+          "node": 25,
+          "port": "data"
+        },
+        "id": 28,
+        "layer_id": 0,
+        "logging": false
+      },
+      "29": {
+        "direction": "->",
+        "source": {
+          "node": 21,
+          "port": "data"
+        },
+        "target": {
+          "node": 26,
+          "port": "data"
+        },
+        "id": 29,
+        "layer_id": 0,
+        "logging": false
+      },
+      "30": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "combined"
+        },
+        "target": {
+          "node": 23,
+          "port": "data"
+        },
+        "id": 30,
+        "layer_id": 0
+      },
+      "32": {
+        "direction": "->",
+        "source": {
+          "node": 25,
+          "port": "false"
+        },
+        "target": {
+          "node": 23,
+          "port": "noPositions"
+        },
+        "id": 32,
+        "layer_id": 0
+      },
+      "33": {
+        "direction": "->",
+        "source": {
+          "node": 26,
+          "port": "true"
+        },
+        "target": {
+          "node": 23,
+          "port": "account"
+        },
+        "id": 33,
+        "layer_id": 0,
+        "logging": false
+      },
+      "35": {
+        "direction": "->",
+        "source": {
+          "node": 23,
+          "port": "data"
+        },
+        "target": {
+          "node": 27,
+          "port": "data"
+        },
+        "id": 35,
+        "layer_id": 0
+      },
+      "36": {
+        "direction": "->",
+        "source": {
+          "node": 25,
+          "port": "true"
+        },
+        "target": {
+          "node": 28,
+          "port": "positions"
+        },
+        "id": 36,
+        "layer_id": 0,
+        "logging": false
+      },
+      "38": {
+        "direction": "->",
+        "source": {
+          "node": 28,
+          "port": "positions"
+        },
+        "target": {
+          "node": 29,
+          "port": "data"
+        },
+        "id": 38,
+        "layer_id": 0,
+        "logging": false
+      },
+      "39": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "stocks"
+        },
+        "target": {
+          "node": 28,
+          "port": "score"
+        },
+        "id": 39,
+        "layer_id": 0
+      },
+      "41": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 30,
+          "port": "alpaca"
+        },
+        "id": 41,
+        "layer_id": 0
+      },
+      "42": {
+        "direction": "->",
+        "source": {
+          "node": 30,
+          "port": "data"
+        },
+        "target": {
+          "node": 31,
+          "port": "orders"
+        },
+        "id": 42,
+        "layer_id": 0
+      },
+      "43": {
+        "direction": "->",
+        "source": {
+          "node": 31,
+          "port": "false"
+        },
+        "target": {
+          "node": 27,
+          "port": "noOpenOrders"
+        },
+        "id": 43,
+        "layer_id": 0
+      },
+      "44": {
+        "direction": "->",
+        "source": {
+          "node": 28,
+          "port": "noSells"
+        },
+        "target": {
+          "node": 32,
+          "port": "noSells"
+        },
+        "id": 44,
+        "layer_id": 0
+      },
+      "45": {
+        "direction": "->",
+        "source": {
+          "node": 26,
+          "port": "true"
+        },
+        "target": {
+          "node": 32,
+          "port": "hasBuyingPower"
+        },
+        "id": 45,
+        "layer_id": 0
+      },
+      "46": {
+        "direction": "->",
+        "source": {
+          "node": 31,
+          "port": "false"
+        },
+        "target": {
+          "node": 32,
+          "port": "noOrders"
+        },
+        "id": 46,
+        "layer_id": 0
+      },
+      "47": {
+        "direction": "->",
+        "source": {
+          "node": 14,
+          "port": "combined"
+        },
+        "target": {
+          "node": 32,
+          "port": "stocks"
+        },
+        "id": 47,
+        "layer_id": 0
+      },
+      "50": {
+        "direction": "->",
+        "source": {
+          "node": 31,
+          "port": "false"
+        },
+        "target": {
+          "node": 29,
+          "port": "noOrders"
+        },
+        "id": 50,
+        "layer_id": 0
+      },
+      "51": {
+        "direction": "->",
+        "source": {
+          "node": 29,
+          "port": "orders"
+        },
+        "target": {
+          "node": 27,
+          "port": "data"
+        },
+        "id": 51,
+        "layer_id": 0
+      },
+      "52": {
+        "direction": "->",
+        "source": {
+          "node": 32,
+          "port": "data"
+        },
+        "target": {
+          "node": 27,
+          "port": "data"
+        },
+        "id": 52,
+        "layer_id": 0
+      },
+      "66": {
+        "direction": "->",
+        "source": {
+          "node": 33,
+          "port": "ping"
+        },
+        "target": {
+          "node": 1,
+          "port": "ping"
+        },
+        "id": 66,
+        "layer_id": 0
+      },
+      "67": {
+        "direction": "->",
+        "source": {
+          "node": 1,
+          "port": "alpaca"
+        },
+        "target": {
+          "node": 27,
+          "port": "alpaca"
+        },
+        "id": 67,
+        "layer_id": 0
+      },
+      "68": {
+        "direction": "->",
+        "source": {
+          "node": 34,
+          "port": "data"
+        },
+        "target": {
+          "node": 35,
+          "port": "data"
+        },
+        "id": 68,
+        "layer_id": 0
+      },
+      "69": {
+        "direction": "->",
+        "source": {
+          "node": 35,
+          "port": "result"
+        },
+        "target": {
+          "node": 36,
+          "port": "data"
+        },
+        "id": 69,
+        "layer_id": 0
+      },
+      "70": {
+        "direction": "->",
+        "source": {
+          "node": 36,
+          "port": "data"
+        },
+        "target": {
+          "node": 3,
+          "port": "symbols"
+        },
+        "id": 70,
+        "layer_id": 0
+      }
+    },
+    "nodes": {
+      "1": {
+        "module": "js",
+        "name": "Alpaca",
+        "require": "const Alpaca = require('@alpacahq/alpaca-trade-api');",
+        "run": "await inputs.ping.take();\nconst alpaca = new Alpaca({\n  keyId: process.env.ALPACA_KEY,\n  secretKey: process.env.ALPACA_SECRET,\n  paper: true,\n})\noutputs.alpaca.put(alpaca);",
+        "inputs": {
+          "ping": true
+        },
+        "outputs": {
+          "alpaca": true
+        },
+        "id": 1,
+        "layer_id": 0,
+        "position": {
+          "left": 5,
+          "right": 210,
+          "top": -47
+        },
+        "symbol": "https://app.alpaca.markets/resources/images/logo-inverse-white-mobile.png",
+        "domrect": {
+          "x": -44,
+          "y": -35,
+          "width": 120,
+          "height": 95,
+          "top": -35,
+          "right": 76,
+          "bottom": 60,
+          "left": -44
+        }
+      },
+      "2": {
+        "module": "js",
+        "name": "getClock",
+        "require": "",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst clock = await alpaca.getClock();\noutputs.data.put(clock);",
+        "inputs": {
+          "alpaca": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 2,
+        "layer_id": 0,
+        "position": {
+          "left": 285,
+          "right": 403,
+          "top": 225
+        },
+        "domrect": {
+          "x": 236,
+          "y": 237,
+          "width": 120,
+          "height": 40,
+          "top": 237,
+          "right": 356,
+          "bottom": 277,
+          "left": 236
+        }
+      },
+      "3": {
+        "module": "js",
+        "name": "getBarset",
+        "require": "const timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconsole.log(\"get bars\");\nconst promise1 = await alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = await alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = await alpaca.getBars('day', group3, { limit: 50, ...timeframe });\nconsole.log(\"got bars\");\nconst merge = [promise1, promise2, promise3].reduce(function(result, current) {\n  return Object.assign(result, current);\n}, {});\nif (outputs.data) {\n  outputs.data.put(merge);\n}\n\n",
+        "inputs": {
+          "alpaca": true,
+          "timeframe": true,
+          "symbols": true,
+          "marketIsOpen": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 3,
+        "layer_id": 0,
+        "position": {
+          "left": 722,
+          "right": 840,
+          "top": 380
+        },
+        "domrect": {
+          "x": 673,
+          "y": 392,
+          "width": 120,
+          "height": 60,
+          "top": 392,
+          "right": 793,
+          "bottom": 452,
+          "left": 673
+        }
+      },
+      "4": {
+        "module": "js",
+        "name": "Last 2 days",
+        "require": "const moment = require(\"moment\")",
+        "run": "const start = moment().hours(9).minutes(30).seconds(0).subtract(2, 'days').toDate();\nconst end = moment().hours(9).minutes(30).seconds(0).toDate();\n\noutputs.data.put({start, end});\nrunning = false;",
+        "inputs": {},
+        "outputs": {
+          "data": true
+        },
+        "id": 4,
+        "layer_id": 0,
+        "position": {
+          "left": 439,
+          "right": 563,
+          "top": 355
+        },
+        "domrect": {
+          "x": 390,
+          "y": 367,
+          "width": 120,
+          "height": 40,
+          "top": 367,
+          "right": 510,
+          "bottom": 407,
+          "left": 390
+        }
+      },
+      "14": {
+        "module": "js",
+        "name": "Score",
+        "require": "const _ = require(\"lodash\");\nconst math = require(\"mathjs\");",
+        "run": "const data = await inputs.data.take();\nconst positives = {};\nconst negatives = {};\nconst neutral = {};\nconst stocks = {positive: [], negative: []};\n_.forEach(data, ({ema, live}, symbol) => {\n  if (!live.length) {\n    return true;\n  }\n  const lastClosingPrice = live[live.length - 1];\n  const lastEMAPrice = ema[ema.length - 1];\n  const diff = Math.round(lastClosingPrice - lastEMAPrice);\n  const means = math.mean([live, ema], 1);\n  const meanTrend = Math.round(means[0] - means[1]);\n  if (diff > 1 && meanTrend > 0) {\n\t_.set(positives, [diff, symbol], {live, ema, diff})\n\tstocks.positive.push(symbol);\n    return true;\n  }\n  if (diff < -2 && lastClosingPrice <= 500 && meanTrend > 0) {\n    _.set(negatives, [diff, symbol], {live, ema, diff})\n    stocks.negative.push(symbol);\n    return true;\n  }\n  neutral[symbol] = {live, ema, diff}\n})\n//console.log(positives);\noutputs.positive.put(positives)\n//outputs.negative.put(negatives)\noutputs.combined.put({...positives, ...negatives});\noutputs.stocks.put(stocks);\n//outputs.neutral.put(neutral);\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "positive": true,
+          "negative": true,
+          "combined": true,
+          "stocks": true,
+          "neutral": true
+        },
+        "id": 14,
+        "layer_id": 0,
+        "position": {
+          "left": 1313,
+          "right": 1433,
+          "top": 298
+        },
+        "domrect": {
+          "x": 1264,
+          "y": 310,
+          "width": 120,
+          "height": 75,
+          "top": 310,
+          "right": 1384,
+          "bottom": 385,
+          "left": 1264
+        }
+      },
+      "17": {
+        "module": "js",
+        "name": "Closing Values",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const stocks = await inputs.data.take();\nconst closingData = {};\n_.forEach(stocks, (data, symbol) => {\n closingData[symbol] = _.map(data, 'c')\n});\noutputs.data.put(closingData);\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 17,
+        "layer_id": 0,
+        "position": {
+          "left": 868,
+          "right": 1006,
+          "top": 384
+        },
+        "domrect": {
+          "x": 819,
+          "y": 396,
+          "width": 140.203125,
+          "height": 40,
+          "top": 396,
+          "right": 959.203125,
+          "bottom": 436,
+          "left": 819
+        }
+      },
+      "18": {
+        "module": "js",
+        "name": "Exponential Moving Average",
+        "require": "const _ = require(\"lodash\");",
+        "run": "function EMACalc(mArray,mRange) {\n  var k = 2/(mRange + 1);\n  // first item is just the same as the first item in the input\n  emaArray = [mArray[0]];\n  // for the rest of the items, they are computed with the previous one\n  for (var i = 1; i < mArray.length; i++) {\n    emaArray.push(mArray[i] * k + emaArray[i - 1] * (1 - k));\n  }\n  return emaArray;\n}\nconst data = await inputs.data.take();\nconst output = {};\n_.forEach(data, (closingPrices, symbol) => {\n\toutput[symbol] = {\n      live: closingPrices,\n      ema: EMACalc(closingPrices, 10)\n    }\n})\noutputs.data.put(output);",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 18,
+        "layer_id": 0,
+        "position": {
+          "left": 1038,
+          "right": 1274,
+          "top": 370
+        },
+        "domrect": {
+          "x": 989,
+          "y": 382,
+          "width": 238.28125,
+          "height": 40,
+          "top": 382,
+          "right": 1227.28125,
+          "bottom": 422,
+          "left": 989
+        }
+      },
+      "19": {
+        "module": "list",
+        "name": "trending",
+        "inputs": {
+          "data": true
+        },
+        "id": 19,
+        "layer_id": 0,
+        "position": {
+          "left": 1641,
+          "right": 1734,
+          "top": 313
+        },
+        "domrect": {
+          "x": 1592,
+          "y": 325,
+          "width": 120,
+          "height": 628,
+          "top": 325,
+          "right": 1712,
+          "bottom": 953,
+          "left": 1592
+        }
+      },
+      "21": {
+        "module": "js",
+        "name": "getAccount",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const alpaca = await inputs.alpaca.take();\nconst account = await alpaca.getAccount();\n_.get(outputs, \"data.put\", ()=>{})(account);",
+        "inputs": {
+          "alpaca": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 21,
+        "layer_id": 0,
+        "position": {
+          "left": 746,
+          "right": 864,
+          "top": 94
+        },
+        "domrect": {
+          "x": 697,
+          "y": 106,
+          "width": 120,
+          "height": 40,
+          "top": 106,
+          "right": 817,
+          "bottom": 146,
+          "left": 697
+        }
+      },
+      "22": {
+        "module": "js",
+        "name": "getPositions",
+        "require": "const _ = require(\"lodash\");",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst positions = await alpaca.getPositions();\n_.get(outputs, \"data.put\", ()=>{})(positions)\n",
+        "inputs": {
+          "alpaca": true,
+          "marketIsOpen": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 22,
+        "layer_id": 0,
+        "position": {
+          "left": 736,
+          "right": 858,
+          "top": 246
+        },
+        "domrect": {
+          "x": 687,
+          "y": 258,
+          "width": 123.5625,
+          "height": 40,
+          "top": 258,
+          "right": 810.5625,
+          "bottom": 298,
+          "left": 687
+        }
+      },
+      "23": {
+        "module": "js",
+        "name": "Initial Buy Orders",
+        "require": "const _ = require(\"lodash\")",
+        "run": "await inputs.noPositions.take();\nconst account = await inputs.account.take();\nconst scoredStocks = await inputs.data.take();\nconst buyingPower = account.buying_power;\nconst orders = {};\nlet totalValue = 0;\nlet safeValue = 0;\nwhile (totalValue <= buyingPower) {\n  _.forEach(scoredStocks, function(stocks, score) {\n      _.forEach(stocks, function(stock, symbol) {\n        totalValue += stock.live[stock.live.length - 1]\n        if (!orders[symbol]) {\n          orders[symbol] = {\n            symbol,\n            side: \"buy\",\n            qty: 0\n          };\n        }\n        if (totalValue <= buyingPower) {\n          safeValue = totalValue;\n          orders[symbol].qty += 1;  \n        }\n      });\n  });\n}\nconsole.log(totalValue, safeValue);\nconsole.log(orders);\noutputs.data.put(orders);",
+        "inputs": {
+          "data": true,
+          "noPositions": true,
+          "account": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 23,
+        "layer_id": 0,
+        "position": {
+          "left": 1676,
+          "right": 1794,
+          "top": 13
+        },
+        "domrect": {
+          "x": 1627,
+          "y": 25,
+          "width": 120,
+          "height": 54,
+          "top": 25,
+          "right": 1747,
+          "bottom": 79,
+          "left": 1627
+        }
+      },
+      "24": {
+        "module": "js",
+        "name": "Market is open",
+        "require": "",
+        "run": "const data = await inputs.data.take();\nif (!outputs) return false;\nif (outputs[data.is_open]) {\n  outputs[data.is_open].put(\"*\");  \n}\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 24,
+        "layer_id": 0,
+        "position": {
+          "left": 460,
+          "right": 599,
+          "top": 226
+        },
+        "domrect": {
+          "x": 411,
+          "y": 238,
+          "width": 140.8125,
+          "height": 40,
+          "top": 238,
+          "right": 551.8125,
+          "bottom": 278,
+          "left": 411
+        }
+      },
+      "25": {
+        "module": "js",
+        "name": "Has Positions",
+        "require": "const _ = require(\"lodash\")",
+        "run": "const data = await inputs.data.take();\nif (data.length) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data); \n}\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 25,
+        "layer_id": 0,
+        "position": {
+          "left": 1035,
+          "right": 1167,
+          "top": 240
+        },
+        "domrect": {
+          "x": 986,
+          "y": 252,
+          "width": 132.140625,
+          "height": 40,
+          "top": 252,
+          "right": 1118.140625,
+          "bottom": 292,
+          "left": 986
+        }
+      },
+      "26": {
+        "module": "js",
+        "name": "Has Buying Power",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const data = await inputs.data.take();\nconst hasBuyingPower = parseInt(data.buying_power) > 0;\nif (hasBuyingPower) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data);\n}",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 26,
+        "layer_id": 0,
+        "position": {
+          "left": 1040,
+          "right": 1203,
+          "top": 103
+        },
+        "domrect": {
+          "x": 991,
+          "y": 115,
+          "width": 165.0625,
+          "height": 40,
+          "top": 115,
+          "right": 1156.0625,
+          "bottom": 155,
+          "left": 991
+        }
+      },
+      "27": {
+        "module": "js",
+        "name": "Trade",
+        "require": "const _ = require(\"lodash\");\n",
+        "run": "const alpaca = await inputs.alpaca.take();\nconsole.log(\"alpaca\");\nawait inputs.noOpenOrders.take();\nconsole.log(\"no orders\");\nconst data = await inputs.data.take();\nconsole.log(\"data to trade\", JSON.stringify(data));\n_.forEach(data, function(order) {\n  order.type = \"market\";\n  order.time_in_force = \"day\";\n  console.log(\"Sending order\", order);\n  alpaca.createOrder(order).then(console.log).catch(e => console.log(e.message));\n})",
+        "inputs": {
+          "alpaca": true,
+          "data": true,
+          "noOpenOrders": true
+        },
+        "outputs": {},
+        "id": 27,
+        "layer_id": 0,
+        "position": {
+          "left": 2187,
+          "right": 2274,
+          "top": 123
+        },
+        "domrect": {
+          "x": 2138,
+          "y": 135,
+          "width": 120,
+          "height": 45,
+          "top": 135,
+          "right": 2258,
+          "bottom": 180,
+          "left": 2138
+        }
+      },
+      "28": {
+        "module": "js",
+        "name": "Keep trending positions",
+        "require": "const _ = require(\"lodash\");",
+        "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  console.log(\"removing positive position\", symbol);\n  delete positions[symbol];\n});\nif (Object.keys(positions).length) {\n  console.log(\"sell positions\");\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
+        "inputs": {
+          "positions": true,
+          "score": true
+        },
+        "outputs": {
+          "positions": true,
+          "noSells": true
+        },
+        "id": 28,
+        "layer_id": 0,
+        "position": {
+          "left": 1590,
+          "right": 1708,
+          "top": 209
+        },
+        "domrect": {
+          "x": 1541,
+          "y": 221,
+          "width": 120,
+          "height": 72,
+          "top": 221,
+          "right": 1661,
+          "bottom": 293,
+          "left": 1541
+        }
+      },
+      "29": {
+        "module": "js",
+        "name": "Define sells",
+        "require": "const _ = require(\"lodash\");",
+        "run": "await inputs.noOrders.take();\nconst data = await inputs.data.take();\nconst orders = {};\n_.forEach(data, function(position, symbol) {\n  orders[symbol] = {\n    symbol,\n    side: \"sell\",\n    qty: position.qty\n  };\n});\noutputs.orders.put(orders);\n",
+        "inputs": {
+          "data": true,
+          "noOrders": true
+        },
+        "outputs": {
+          "orders": true
+        },
+        "id": 29,
+        "layer_id": 0,
+        "position": {
+          "left": 1944,
+          "right": 2062,
+          "top": -6
+        },
+        "domrect": {
+          "x": 1895,
+          "y": 6,
+          "width": 120,
+          "height": 40,
+          "top": 6,
+          "right": 2015,
+          "bottom": 46,
+          "left": 1895
+        }
+      },
+      "30": {
+        "module": "js",
+        "name": "getOrders",
+        "require": "",
+        "run": "//await inputs.marketIsOpen.take();\nconst alpaca = await inputs.alpaca.take();\nconst orders = await alpaca.getOrders();\noutputs.data.put(orders);\n",
+        "inputs": {
+          "alpaca": true,
+          "marketIsOpen": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 30,
+        "layer_id": 0,
+        "position": {
+          "left": 745,
+          "right": 850,
+          "top": -41
+        },
+        "domrect": {
+          "x": 696,
+          "y": -29,
+          "width": 120,
+          "height": 40,
+          "top": -29,
+          "right": 816,
+          "bottom": 11,
+          "left": 696
+        }
+      },
+      "31": {
+        "module": "js",
+        "name": "Has Pending Orders",
+        "require": "const _ = require(\"lodash\");",
+        "run": "const orders = await inputs.orders.take();\nif (orders.length) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data); \n}\n",
+        "inputs": {
+          "orders": true
+        },
+        "outputs": {
+          "true": true,
+          "false": true
+        },
+        "id": 31,
+        "layer_id": 0,
+        "position": {
+          "left": 1017,
+          "right": 1194,
+          "top": -38
+        },
+        "domrect": {
+          "x": 968,
+          "y": -26,
+          "width": 179.234375,
+          "height": 40,
+          "top": -26,
+          "right": 1147.234375,
+          "bottom": 14,
+          "left": 968
+        }
+      },
+      "32": {
+        "module": "js",
+        "name": "Define buys",
+        "require": "const _ = require(\"lodash\");",
+        "run": "await inputs.noOrders.take();\nawait inputs.noSells.take();\nconst scoredStocks = await inputs.stocks.take();\nconst account = await inputs.hasBuyingPower.take();\nconst buyingPower = account.buying_power;\nconsole.log(\"To Buy:\", scoredStocks, \"Buying Power:\", buyingPower);\nlet orders = {};\nlet totalValue = 0;\nlet safeValue = 0;\nwhile (totalValue <= buyingPower) {\n  _.forEach(scoredStocks, function(stocks, score) {\n      _.forEach(stocks, function(stock, symbol) {\n        totalValue += stock.live[stock.live.length - 1]\n        if (!orders[symbol]) {\n          orders[symbol] = {\n            symbol,\n            side: \"buy\",\n            qty: 0\n          };\n        }\n        if (totalValue <= buyingPower) {\n          safeValue = totalValue;\n          orders[symbol].qty += 1;  \n        }\n      });\n  });\n}\norders = _.filter(orders, order => order.qty > 0);\nconsole.log(totalValue, safeValue);\nconsole.log(orders);\nif (orders.length) {\n  outputs.data.put(orders);  \n} else {\n  console.log(\"Not enough buying power\");\n}\n\n",
+        "inputs": {
+          "noOrders": true,
+          "hasBuyingPower": true,
+          "noSells": true,
+          "stocks": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "id": 32,
+        "layer_id": 0,
+        "position": {
+          "left": 1928,
+          "right": 2046,
+          "top": 205
+        },
+        "domrect": {
+          "x": 1879,
+          "y": 217,
+          "width": 120,
+          "height": 60,
+          "top": 217,
+          "right": 1999,
+          "bottom": 277,
+          "left": 1879
+        }
+      },
+      "33": {
+        "module": "js",
+        "name": "js",
+        "require": "",
+        "run": "function ping() {\n  setTimeout(() => {\n    outputs.ping.put(\"*\");\n    ping();\n  }, 360000);\n}\noutputs.ping.put(\"*\");\nping();\n\n\n",
+        "inputs": {},
+        "outputs": {
+          "ping": true
+        },
+        "position": {
+          "left": -209,
+          "right": -89,
+          "top": -42
+        },
+        "id": 33,
+        "layer_id": 0,
+        "domrect": {
+          "x": -258,
+          "y": -30,
+          "width": 120,
+          "height": 40,
+          "top": -30,
+          "right": -138,
+          "bottom": 10,
+          "left": -258
+        }
+      },
+      "34": {
+        "module": "js",
+        "name": "Gainer stocks",
+        "require": "const got = require('got');\n",
+        "run": "const res = await got.post(\n  \"https://query2.finance.yahoo.com/v1/finance/screener?crumb=XXGScF6UERt&lang=en-US&region=US&formatted=true&corsDomain=finance.yahoo.com\",\n  {\n    responseType: \"json\",\n    headers: {\n    \tauthority: \"query2.finance.yahoo.com\"\n    },\n    json: {\n      offset: 0,\n      size: 10,\n      sortField: \"intradaypricechange\",\n      sortType: \"desc\",\n      quoteType: \"EQUITY\",\n      query: {\n        operator: \"AND\",\n        operands: [\n          {\n            operator: \"GT\",\n            operands: [\"percentchange\", 3],\n          },\n          {\n            operator: \"eq\",\n            operands: [\"region\", \"us\"],\n          },\n          {\n            operator: \"or\",\n            operands: [\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 2000000000, 10000000000],\n              },\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 10000000000, 100000000000],\n              },\n              { operator: \"GT\", operands: [\"intradaymarketcap\", 100000000000] },\n            ],\n          },\n          { operator: \"gt\", operands: [\"dayvolume\", 15000] },\n        ],\n      },\n      userId: \"\",\n      userIdType: \"guid\",\n    },\n  }\n);\nif (res.body && outputs.data) {\n  outputs.data.put(res.body)\n}\n\n",
+        "inputs": {},
+        "outputs": {
+          "data": true
+        },
+        "position": {
+          "left": 82,
+          "right": 229,
+          "top": 415
+        },
+        "id": 34,
+        "layer_id": 0,
+        "domrect": {
+          "x": 33,
+          "y": 427,
+          "width": 132.890625,
+          "height": 40,
+          "top": 427,
+          "right": 165.890625,
+          "bottom": 467,
+          "left": 33
+        }
+      },
+      "35": {
+        "module": "js",
+        "name": "results",
+        "require": "",
+        "run": "const data = await inputs.data.take();\noutputs.result.put(data.finance.result[0]);\noutputs.error.put(data.finance.error);",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "result": true,
+          "error": true
+        },
+        "position": {
+          "left": 262,
+          "right": 380,
+          "top": 419
+        },
+        "id": 35,
+        "layer_id": 0,
+        "domrect": {
+          "x": 213,
+          "y": 431,
+          "width": 120,
+          "height": 40,
+          "top": 431,
+          "right": 333,
+          "bottom": 471,
+          "left": 213
+        }
+      },
+      "36": {
+        "module": "js",
+        "name": "gainer symbols",
+        "require": "",
+        "run": "const data = await inputs.data.take();\nconst symbols = data.quotes.map(gainer => gainer.symbol)\nconsole.log(symbols);\noutputs.data.put(symbols);\n",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "data": true
+        },
+        "position": {
+          "left": 427,
+          "right": 569,
+          "top": 425
+        },
+        "id": 36,
+        "layer_id": 0,
+        "domrect": {
+          "x": 378,
+          "y": 437,
+          "width": 143.671875,
+          "height": 40,
+          "top": 437,
+          "right": 521.671875,
+          "bottom": 477,
+          "left": 378
+        }
+      }
+    },
+    "packets": {},
+    "configuring": {
+      "module": "js",
+      "name": "gainer symbols",
+      "require": "",
+      "run": "const data = await inputs.data.take();\nconst symbols = data.quotes.map(gainer => gainer.symbol)\noutputs.data.put(symbols);\n",
+      "inputs": {
+        "data": true
+      },
+      "outputs": {
+        "data": true
+      },
+      "position": {
+        "left": 427,
+        "right": 569,
+        "top": 425
+      },
+      "id": 36,
+      "layer_id": 0
+    },
+    "addingLink": {},
+    "mouseOverPort": "",
+    "webview": {
+      "style": {
+        "width": "320px",
+        "height": "480px",
+        "left": "10px",
+        "top": "10px"
+      },
+      "src": ""
+    },
+    "problem": {},
+    "selectedLinks": {}
+  }
+]
