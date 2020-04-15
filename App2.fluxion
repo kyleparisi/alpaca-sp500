@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": -790,
-      "y": 13
+      "x": -677,
+      "y": 58
     },
     "throttle": 2,
     "scale": 1,
@@ -181,7 +181,7 @@
         },
         "id": 28,
         "layer_id": 0,
-        "logging": false
+        "logging": true
       },
       "29": {
         "direction": "->",
@@ -450,40 +450,14 @@
       "68": {
         "direction": "->",
         "source": {
-          "node": 34,
-          "port": "data"
-        },
-        "target": {
-          "node": 35,
-          "port": "data"
-        },
-        "id": 68,
-        "layer_id": 0
-      },
-      "69": {
-        "direction": "->",
-        "source": {
-          "node": 35,
-          "port": "result"
-        },
-        "target": {
-          "node": 36,
-          "port": "data"
-        },
-        "id": 69,
-        "layer_id": 0
-      },
-      "70": {
-        "direction": "->",
-        "source": {
-          "node": 36,
+          "node": 37,
           "port": "data"
         },
         "target": {
           "node": 3,
           "port": "symbols"
         },
-        "id": 70,
+        "id": 68,
         "layer_id": 0
       }
     },
@@ -551,7 +525,7 @@
         "module": "js",
         "name": "getBarset",
         "require": "const timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();",
-        "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconsole.log(\"get bars\");\nconst promise1 = await alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = await alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = await alpaca.getBars('day', group3, { limit: 50, ...timeframe });\nconsole.log(\"got bars\");\nconst merge = [promise1, promise2, promise3].reduce(function(result, current) {\n  return Object.assign(result, current);\n}, {});\nif (outputs.data) {\n  outputs.data.put(merge);\n}\n\n",
+        "run": "const alpaca = await inputs.alpaca.take();\nconsole.log(\"get bars\");\nconst bars = await alpaca.getBars('day', symbols, { limit: 50, ...timeframe });\nconsole.log(\"got bars\");\nif (outputs.data) {\n  outputs.data.put(bars);\n}\n\n",
         "inputs": {
           "alpaca": true,
           "timeframe": true,
@@ -565,7 +539,7 @@
         "layer_id": 0,
         "position": {
           "left": 722,
-          "right": 840,
+          "right": 842,
           "top": 380
         },
         "domrect": {
@@ -581,9 +555,9 @@
       },
       "4": {
         "module": "js",
-        "name": "Last 2 days",
+        "name": "Last 30 days",
         "require": "const moment = require(\"moment\")",
-        "run": "const start = moment().hours(9).minutes(30).seconds(0).subtract(2, 'days').toDate();\nconst end = moment().hours(9).minutes(30).seconds(0).toDate();\n\noutputs.data.put({start, end});\nrunning = false;",
+        "run": "const start = moment().hours(9).minutes(30).seconds(0).subtract(30, 'days').toDate();\nconst end = moment().hours(9).minutes(30).seconds(0).toDate();\n\noutputs.data.put({start, end});\nrunning = false;",
         "inputs": {},
         "outputs": {
           "data": true
@@ -857,7 +831,7 @@
         "layer_id": 0,
         "position": {
           "left": 1035,
-          "right": 1167,
+          "right": 1165,
           "top": 240
         },
         "domrect": {
@@ -1110,112 +1084,59 @@
           "left": -258
         }
       },
-      "34": {
-        "module": "js",
-        "name": "Gainer stocks",
-        "require": "const got = require('got');\n",
-        "run": "const res = await got.post(\n  \"https://query2.finance.yahoo.com/v1/finance/screener?crumb=XXGScF6UERt&lang=en-US&region=US&formatted=true&corsDomain=finance.yahoo.com\",\n  {\n    responseType: \"json\",\n    headers: {\n    \tauthority: \"query2.finance.yahoo.com\"\n    },\n    json: {\n      offset: 0,\n      size: 10,\n      sortField: \"intradaypricechange\",\n      sortType: \"desc\",\n      quoteType: \"EQUITY\",\n      query: {\n        operator: \"AND\",\n        operands: [\n          {\n            operator: \"GT\",\n            operands: [\"percentchange\", 3],\n          },\n          {\n            operator: \"eq\",\n            operands: [\"region\", \"us\"],\n          },\n          {\n            operator: \"or\",\n            operands: [\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 2000000000, 10000000000],\n              },\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 10000000000, 100000000000],\n              },\n              { operator: \"GT\", operands: [\"intradaymarketcap\", 100000000000] },\n            ],\n          },\n          { operator: \"gt\", operands: [\"dayvolume\", 15000] },\n        ],\n      },\n      userId: \"\",\n      userIdType: \"guid\",\n    },\n  }\n);\nif (res.body && outputs.data) {\n  outputs.data.put(res.body)\n}\n\n",
+      "37": {
+        "module": "webviewnode",
+        "name": "webviewnode",
+        "require": "",
+        "run": "function Sleep(duration) {\n  return new Promise(resolve => setTimeout(resolve, duration));\n}\n\n(async() => {\n  document.querySelector(\"#scr-res-table > div.Ovx\\\\(a\\\\).Ovx\\\\(h\\\\)--print.Ovy\\\\(h\\\\) > table > thead > tr > th:nth-child(4)\").click()\n  await Sleep(1000)\n  document.querySelector(\"#scr-res-table > div.Ovx\\\\(a\\\\).Ovx\\\\(h\\\\)--print.Ovy\\\\(h\\\\) > table > thead > tr > th:nth-child(4)\").click()\n  await Sleep(1000)\n  let els = []\n  for (let i = 1; i <= 10; i++) {\n  \tlet el = document.querySelector(`#scr-res-table > div.Ovx\\\\(a\\\\).Ovx\\\\(h\\\\)--print.Ovy\\\\(h\\\\) > table > tbody > tr:nth-child(${i}) > td.Va\\\\(m\\\\).Ta\\\\(start\\\\).Pstart\\\\(6px\\\\).Pend\\\\(10px\\\\).Miw\\\\(90px\\\\).Start\\\\(0\\\\).Pend\\\\(10px\\\\).simpTblRow\\\\:h_Bgc\\\\(\\\\$extraLightBlue\\\\).Pos\\\\(st\\\\).Bgc\\\\(white\\\\).Bgc\\\\(white\\\\).Ta\\\\(start\\\\)\\\\!.Fz\\\\(s\\\\) > a`)\n    els.push(el)\n  }\n  return els.map(el => el.innerHTML);\n})()\n",
+        "src": "https://finance.yahoo.com/gainers",
         "inputs": {},
         "outputs": {
           "data": true
         },
         "position": {
-          "left": 82,
-          "right": 229,
-          "top": 415
+          "left": 23,
+          "right": 513,
+          "top": 420
         },
-        "id": 34,
-        "layer_id": 0,
-        "domrect": {
-          "x": 33,
-          "y": 427,
-          "width": 132.890625,
-          "height": 40,
-          "top": 427,
-          "right": 165.890625,
-          "bottom": 467,
-          "left": 33
-        }
-      },
-      "35": {
-        "module": "js",
-        "name": "results",
-        "require": "",
-        "run": "const data = await inputs.data.take();\noutputs.result.put(data.finance.result[0]);\noutputs.error.put(data.finance.error);",
-        "inputs": {
-          "data": true
+        "style": {
+          "width": "500px",
+          "height": "500px"
         },
-        "outputs": {
-          "result": true,
-          "error": true
-        },
-        "position": {
-          "left": 262,
-          "right": 380,
-          "top": 419
-        },
-        "id": 35,
-        "layer_id": 0,
-        "domrect": {
-          "x": 213,
-          "y": 431,
-          "width": 120,
-          "height": 40,
-          "top": 431,
-          "right": 333,
-          "bottom": 471,
-          "left": 213
-        }
-      },
-      "36": {
-        "module": "js",
-        "name": "gainer symbols",
-        "require": "",
-        "run": "const data = await inputs.data.take();\nconst symbols = data.quotes.map(gainer => gainer.symbol)\nconsole.log(symbols);\noutputs.data.put(symbols);\n",
-        "inputs": {
-          "data": true
-        },
-        "outputs": {
-          "data": true
-        },
-        "position": {
-          "left": 427,
-          "right": 569,
-          "top": 425
-        },
-        "id": 36,
-        "layer_id": 0,
-        "domrect": {
-          "x": 378,
-          "y": 437,
-          "width": 143.671875,
-          "height": 40,
-          "top": 437,
-          "right": 521.671875,
-          "bottom": 477,
-          "left": 378
-        }
+        "id": 37,
+        "layer_id": 0
       }
     },
     "packets": {},
     "configuring": {
       "module": "js",
-      "name": "gainer symbols",
-      "require": "",
-      "run": "const data = await inputs.data.take();\nconst symbols = data.quotes.map(gainer => gainer.symbol)\noutputs.data.put(symbols);\n",
+      "name": "Has Positions",
+      "require": "const _ = require(\"lodash\")",
+      "run": "const data = await inputs.data.take();\nif (data.length) {\n  _.get(outputs, \"true.put\", ()=>{})(data);\n} else {\n  _.get(outputs, \"false.put\", ()=>{})(data); \n}\n",
       "inputs": {
         "data": true
       },
       "outputs": {
-        "data": true
+        "true": true,
+        "false": true
       },
+      "id": 25,
+      "layer_id": 0,
       "position": {
-        "left": 427,
-        "right": 569,
-        "top": 425
+        "left": 1035,
+        "right": 1165,
+        "top": 240
       },
-      "id": 36,
-      "layer_id": 0
+      "domrect": {
+        "x": 986,
+        "y": 252,
+        "width": 132.140625,
+        "height": 40,
+        "top": 252,
+        "right": 1118.140625,
+        "bottom": 292,
+        "left": 986
+      }
     },
     "addingLink": {},
     "mouseOverPort": "",

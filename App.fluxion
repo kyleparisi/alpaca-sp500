@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": -1078,
-      "y": 54
+      "x": 379,
+      "y": 335
     },
     "throttle": 2,
     "scale": 1,
@@ -459,6 +459,32 @@
         },
         "id": 67,
         "layer_id": 0
+      },
+      "68": {
+        "direction": "->",
+        "source": {
+          "node": 34,
+          "port": "data"
+        },
+        "target": {
+          "node": 35,
+          "port": "data"
+        },
+        "id": 68,
+        "layer_id": 0
+      },
+      "69": {
+        "direction": "->",
+        "source": {
+          "node": 35,
+          "port": "result"
+        },
+        "target": {
+          "node": 36,
+          "port": "data"
+        },
+        "id": 69,
+        "layer_id": 0
       }
     },
     "nodes": {
@@ -561,7 +587,7 @@
         "module": "js",
         "name": "Score",
         "require": "const _ = require(\"lodash\");\nconst math = require(\"mathjs\");",
-        "run": "const data = await inputs.data.take();\nconst positives = {};\nconst negatives = {};\nconst neutral = {};\nconst stocks = {positive: [], negative: []};\n_.forEach(data, ({ema, live}, symbol) => {\n  if (!live.length) {\n    return true;\n  }\n  const lastClosingPrice = live[live.length - 1];\n  const lastEMAPrice = ema[ema.length - 1];\n  const diff = Math.round(lastClosingPrice - lastEMAPrice);\n  const means = math.mean([live, ema], 1);\n  const meanTrend = Math.round(means[0] - means[1]);\n  if (diff > 1 && meanTrend > 0) {\n\t_.set(positives, [diff, symbol], {live, ema, diff})\n\tstocks.positive.push(symbol);\n    return true;\n  }\n  if (diff < -0.5 && lastClosingPrice <= 500 && meanTrend > 0) {\n    _.set(negatives, [diff, symbol], {live, ema, diff})\n    stocks.negative.push(symbol);\n    return true;\n  }\n  neutral[symbol] = {live, ema, diff}\n})\n//console.log(positives);\noutputs.positive.put(positives)\n//outputs.negative.put(negatives)\noutputs.combined.put({...positives, ...negatives});\noutputs.stocks.put(stocks);\n//outputs.neutral.put(neutral);\n",
+        "run": "const data = await inputs.data.take();\nconst positives = {};\nconst negatives = {};\nconst neutral = {};\nconst stocks = {positive: [], negative: []};\n_.forEach(data, ({ema, live}, symbol) => {\n  if (!live.length) {\n    return true;\n  }\n  const lastClosingPrice = live[live.length - 1];\n  const lastEMAPrice = ema[ema.length - 1];\n  const diff = Math.round(lastClosingPrice - lastEMAPrice);\n  const means = math.mean([live, ema], 1);\n  const meanTrend = Math.round(means[0] - means[1]);\n  if (diff > 1 && meanTrend > 0) {\n\t_.set(positives, [diff, symbol], {live, ema, diff})\n\tstocks.positive.push(symbol);\n    return true;\n  }\n  if (diff < -2 && lastClosingPrice <= 500 && meanTrend > 0) {\n    _.set(negatives, [diff, symbol], {live, ema, diff})\n    stocks.negative.push(symbol);\n    return true;\n  }\n  neutral[symbol] = {live, ema, diff}\n})\n//console.log(positives);\noutputs.positive.put(positives)\n//outputs.negative.put(negatives)\noutputs.combined.put({...positives, ...negatives});\noutputs.stocks.put(stocks);\n//outputs.neutral.put(neutral);\n",
         "inputs": {
           "data": true
         },
@@ -890,10 +916,80 @@
         },
         "id": 33,
         "layer_id": 0
+      },
+      "34": {
+        "module": "js",
+        "name": "Trending stocks",
+        "require": "const got = require('got');\nconst cache = {};",
+        "run": "if (cache.timestamp) {\n  outputs.body.put(cache.data);\n}\nconst res = await got.post(\n  \"https://query2.finance.yahoo.com/v1/finance/screener?crumb=XXGScF6UERt&lang=en-US&region=US&formatted=true&corsDomain=finance.yahoo.com\",\n  {\n    responseType: \"json\",\n    headers: {\n    \tauthority: \"query2.finance.yahoo.com\"\n    },\n    json: {\n      offset: 0,\n      size: 10,\n      sortField: \"intradaypricechange\",\n      sortType: \"desc\",\n      quoteType: \"EQUITY\",\n      query: {\n        operator: \"AND\",\n        operands: [\n          {\n            operator: \"GT\",\n            operands: [\"percentchange\", 3],\n          },\n          {\n            operator: \"eq\",\n            operands: [\"region\", \"us\"],\n          },\n          {\n            operator: \"or\",\n            operands: [\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 2000000000, 10000000000],\n              },\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 10000000000, 100000000000],\n              },\n              { operator: \"GT\", operands: [\"intradaymarketcap\", 100000000000] },\n            ],\n          },\n          { operator: \"gt\", operands: [\"dayvolume\", 15000] },\n        ],\n      },\n      userId: \"\",\n      userIdType: \"guid\",\n    },\n  }\n);\nif (res.body && outputs.data) {\n  cache.time = Date.now();\n  cache.data = res.body;\n  outputs.data.put(res.body)\n}\n\n",
+        "inputs": {},
+        "outputs": {
+          "data": true
+        },
+        "position": {
+          "left": -190,
+          "right": -43,
+          "top": -185
+        },
+        "id": 34,
+        "layer_id": 0
+      },
+      "35": {
+        "module": "js",
+        "name": "results",
+        "require": "",
+        "run": "const data = await inputs.data.take();\noutputs.result.put(data.finance.result[0]);\noutputs.error.put(data.finance.error);",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {
+          "result": true,
+          "error": true
+        },
+        "position": {
+          "left": -2,
+          "right": 118,
+          "top": -198
+        },
+        "id": 35,
+        "layer_id": 0
+      },
+      "36": {
+        "module": "js",
+        "name": "js",
+        "require": "",
+        "run": "const data = await inputs.data.take();\nconsole.log(data);",
+        "inputs": {
+          "data": true
+        },
+        "outputs": {},
+        "position": {
+          "left": 174,
+          "right": 294,
+          "top": -238
+        },
+        "id": 36,
+        "layer_id": 0
       }
     },
     "packets": {},
-    "configuring": {},
+    "configuring": {
+      "module": "js",
+      "name": "Trending stocks",
+      "require": "const got = require('got');",
+      "run": "const res = await got.post(\n  \"https://query2.finance.yahoo.com/v1/finance/screener?crumb=XXGScF6UERt&lang=en-US&region=US&formatted=true&corsDomain=finance.yahoo.com\",\n  {\n    responseType: \"json\",\n    headers: {\n    \tauthority: \"query2.finance.yahoo.com\"\n    },\n    json: {\n      offset: 0,\n      size: 10,\n      sortField: \"intradaypricechange\",\n      sortType: \"desc\",\n      quoteType: \"EQUITY\",\n      query: {\n        operator: \"AND\",\n        operands: [\n          {\n            operator: \"GT\",\n            operands: [\"percentchange\", 3],\n          },\n          {\n            operator: \"eq\",\n            operands: [\"region\", \"us\"],\n          },\n          {\n            operator: \"or\",\n            operands: [\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 2000000000, 10000000000],\n              },\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 10000000000, 100000000000],\n              },\n              { operator: \"GT\", operands: [\"intradaymarketcap\", 100000000000] },\n            ],\n          },\n          { operator: \"gt\", operands: [\"dayvolume\", 15000] },\n        ],\n      },\n      userId: \"\",\n      userIdType: \"guid\",\n    },\n  }\n);\nif (res.body && outputs.data) {\n  outputs.data.put(res.body)\n}\n\n",
+      "inputs": {},
+      "outputs": {
+        "data": true
+      },
+      "position": {
+        "left": -190,
+        "right": -43,
+        "top": -185
+      },
+      "id": 34,
+      "layer_id": 0
+    },
     "addingLink": {},
     "mouseOverPort": "",
     "webview": {
