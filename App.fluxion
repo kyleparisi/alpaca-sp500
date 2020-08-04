@@ -30,8 +30,8 @@
       "height": 315
     },
     "pan": {
-      "x": 379,
-      "y": 335
+      "x": -809,
+      "y": 106
     },
     "throttle": 2,
     "scale": 1,
@@ -91,19 +91,6 @@
         "id": 18,
         "layer_id": 0
       },
-      "20": {
-        "direction": "->",
-        "source": {
-          "node": 14,
-          "port": "positive"
-        },
-        "target": {
-          "node": 19,
-          "port": "data"
-        },
-        "id": 20,
-        "layer_id": 0
-      },
       "21": {
         "direction": "->",
         "source": {
@@ -154,19 +141,6 @@
           "port": "timeframe"
         },
         "id": 24,
-        "layer_id": 0
-      },
-      "25": {
-        "direction": "->",
-        "source": {
-          "node": 5,
-          "port": "data"
-        },
-        "target": {
-          "node": 3,
-          "port": "symbols"
-        },
-        "id": 25,
         "layer_id": 0
       },
       "27": {
@@ -463,24 +437,25 @@
       "68": {
         "direction": "->",
         "source": {
-          "node": 34,
+          "node": 37,
           "port": "data"
         },
         "target": {
-          "node": 35,
-          "port": "data"
+          "node": 3,
+          "port": "symbols"
         },
         "id": 68,
-        "layer_id": 0
+        "layer_id": 0,
+        "logging": true
       },
       "69": {
         "direction": "->",
         "source": {
-          "node": 35,
-          "port": "result"
+          "node": 14,
+          "port": "positive"
         },
         "target": {
-          "node": 36,
+          "node": 38,
           "port": "data"
         },
         "id": 69,
@@ -506,7 +481,17 @@
           "right": 210,
           "top": -47
         },
-        "symbol": "https://app.alpaca.markets/resources/images/logo-inverse-white-mobile.png"
+        "symbol": "https://app.alpaca.markets/resources/images/logo-inverse-white-mobile.png",
+        "domrect": {
+          "x": -44,
+          "y": -35,
+          "width": 120,
+          "height": 95,
+          "top": -35,
+          "right": 76,
+          "bottom": 60,
+          "left": -44
+        }
       },
       "2": {
         "module": "js",
@@ -525,13 +510,23 @@
           "left": 285,
           "right": 403,
           "top": 225
+        },
+        "domrect": {
+          "x": 236,
+          "y": 237,
+          "width": 120,
+          "height": 40,
+          "top": 237,
+          "right": 356,
+          "bottom": 277,
+          "left": 236
         }
       },
       "3": {
         "module": "js",
         "name": "getBarset",
         "require": "const timeframe = await inputs.timeframe.take();\nconst symbols = await inputs.symbols.take();",
-        "run": "const alpaca = await inputs.alpaca.take();\nconst group1 = symbols.slice(0, 199);\nconst group2 = symbols.slice(200, 399);\nconst group3 = symbols.slice(400, 505);\nconsole.log(\"get bars\");\nconst promise1 = await alpaca.getBars('day', group1, { limit: 50, ...timeframe });\nconst promise2 = await alpaca.getBars('day', group2, { limit: 50, ...timeframe });\nconst promise3 = await alpaca.getBars('day', group3, { limit: 50, ...timeframe });\nconsole.log(\"got bars\");\nconst merge = [promise1, promise2, promise3].reduce(function(result, current) {\n  return Object.assign(result, current);\n}, {});\nif (outputs.data) {\n  outputs.data.put(merge);\n}\n\n",
+        "run": "const alpaca = await inputs.alpaca.take();\nconsole.log(\"get bars\");\nconst bars = await alpaca.getBars('day', symbols, { limit: 50, ...timeframe });\nconsole.log(\"got bars\");\nif (outputs.data) {\n  outputs.data.put(bars);\n}\n\n",
         "inputs": {
           "alpaca": true,
           "timeframe": true,
@@ -545,15 +540,25 @@
         "layer_id": 0,
         "position": {
           "left": 722,
-          "right": 840,
+          "right": 842,
           "top": 380
+        },
+        "domrect": {
+          "x": 673,
+          "y": 392,
+          "width": 120,
+          "height": 60,
+          "top": 392,
+          "right": 793,
+          "bottom": 452,
+          "left": 673
         }
       },
       "4": {
         "module": "js",
-        "name": "Last 50 days",
+        "name": "Last 30 days",
         "require": "const moment = require(\"moment\")",
-        "run": "const start = moment().hours(9).minutes(30).seconds(0).subtract(50, 'days').toDate();\nconst end = moment().hours(9).minutes(30).seconds(0).toDate();\n\noutputs.data.put({start, end});\nrunning = false;",
+        "run": "const start = moment().hours(9).minutes(30).seconds(0).subtract(30, 'days').toDate();\nconst end = moment().hours(9).minutes(30).seconds(0).toDate();\n\noutputs.data.put({start, end});\nrunning = false;",
         "inputs": {},
         "outputs": {
           "data": true
@@ -564,23 +569,16 @@
           "left": 439,
           "right": 563,
           "top": 355
-        }
-      },
-      "5": {
-        "module": "js",
-        "name": "S&P 500 Symbols",
-        "require": "",
-        "run": "if (!outputs) return;\noutputs.data.put([\n\"MMM\",\n\"ABT\",\n\"ABBV\",\n\"ABMD\",\n\"ACN\",\n\"ATVI\",\n\"ADBE\",\n\"AMD\",\n\"AAP\",\n\"AES\",\n\"AMG\",\n\"AFL\",\n\"A\",\n\"APD\",\n\"AKAM\",\n\"ALK\",\n\"ALB\",\n\"ARE\",\n\"ALXN\",\n\"ALGN\",\n\"ALLE\",\n\"AGN\",\n\"ADS\",\n\"LNT\",\n\"ALL\",\n\"GOOGL\",\n\"GOOG\",\n\"MO\",\n\"AMZN\",\n\"AEE\",\n\"AAL\",\n\"AEP\",\n\"AXP\",\n\"AIG\",\n\"AMT\",\n\"AWK\",\n\"AMP\",\n\"ABC\",\n\"AME\",\n\"AMGN\",\n\"APH\",\n\"APC\",\n\"ADI\",\n\"ANSS\",\n\"ANTM\",\n\"AON\",\n\"AOS\",\n\"APA\",\n\"AIV\",\n\"AAPL\",\n\"AMAT\",\n\"APTV\",\n\"ADM\",\n\"ARNC\",\n\"ANET\",\n\"AJG\",\n\"AIZ\",\n\"ATO\",\n\"T\",\n\"ADSK\",\n\"ADP\",\n\"AZO\",\n\"AVB\",\n\"AVY\",\n\"BHGE\",\n\"BLL\",\n\"BAC\",\n\"BK\",\n\"BAX\",\n\"BBT\",\n\"BDX\",\n\"BRK\",\n\"BBY\",\n\"BIIB\",\n\"BLK\",\n\"HRB\",\n\"BA\",\n\"BKNG\",\n\"BWA\",\n\"BXP\",\n\"BSX\",\n\"BMY\",\n\"AVGO\",\n\"BR\",\n\"BF\",\n\"CHRW\",\n\"COG\",\n\"CDNS\",\n\"CPB\",\n\"COF\",\n\"CPRI\",\n\"CAH\",\n\"KMX\",\n\"CCL\",\n\"CAT\",\n\"CBRE\",\n\"CBS\",\n\"CE\",\n\"CELG\",\n\"CNC\",\n\"CNP\",\n\"CTL\",\n\"CERN\",\n\"CF\",\n\"SCHW\",\n\"CHTR\",\n\"CVX\",\n\"CMG\",\n\"CB\",\n\"CHD\",\n\"CI\",\n\"XEC\",\n\"CINF\",\n\"CTAS\",\n\"CSCO\",\n\"C\",\n\"CFG\",\n\"CTXS\",\n\"CLX\",\n\"CME\",\n\"CMS\",\n\"KO\",\n\"CTSH\",\n\"CL\",\n\"CMCSA\",\n\"CMA\",\n\"CAG\",\n\"CXO\",\n\"COP\",\n\"ED\",\n\"STZ\",\n\"COO\",\n\"CPRT\",\n\"GLW\",\n\"COST\",\n\"COTY\",\n\"CCI\",\n\"CSX\",\n\"CMI\",\n\"CVS\",\n\"DHI\",\n\"DHR\",\n\"DRI\",\n\"DVA\",\n\"DE\",\n\"DAL\",\n\"XRAY\",\n\"DVN\",\n\"FANG\",\n\"DLR\",\n\"DFS\",\n\"DISCA\",\n\"DISCK\",\n\"DISH\",\n\"DG\",\n\"DLTR\",\n\"D\",\n\"DOV\",\n\"DOW\",\n\"DWDP\",\n\"DTE\",\n\"DRE\",\n\"DUK\",\n\"DXC\",\n\"ETFC\",\n\"EMN\",\n\"ETN\",\n\"EBAY\",\n\"ECL\",\n\"EIX\",\n\"EW\",\n\"EA\",\n\"EMR\",\n\"ETR\",\n\"EOG\",\n\"EFX\",\n\"EQIX\",\n\"EQR\",\n\"ESS\",\n\"EL\",\n\"EVRG\",\n\"ES\",\n\"RE\",\n\"EXC\",\n\"EXPE\",\n\"EXPD\",\n\"EXR\",\n\"XOM\",\n\"FFIV\",\n\"FB\",\n\"FAST\",\n\"FRT\",\n\"FDX\",\n\"FIS\",\n\"FITB\",\n\"FE\",\n\"FRC\",\n\"FISV\",\n\"FLT\",\n\"FLIR\",\n\"FLS\",\n\"FLR\",\n\"FMC\",\n\"FL\",\n\"F\",\n\"FTNT\",\n\"FTV\",\n\"FBHS\",\n\"BEN\",\n\"FCX\",\n\"GPS\",\n\"GRMN\",\n\"IT\",\n\"GD\",\n\"GE\",\n\"GIS\",\n\"GM\",\n\"GPC\",\n\"GILD\",\n\"GPN\",\n\"GS\",\n\"GWW\",\n\"HAL\",\n\"HBI\",\n\"HOG\",\n\"HRS\",\n\"HIG\",\n\"HAS\",\n\"HCA\",\n\"HCP\",\n\"HP\",\n\"HSIC\",\n\"HSY\",\n\"HES\",\n\"HPE\",\n\"HLT\",\n\"HFC\",\n\"HOLX\",\n\"HD\",\n\"HON\",\n\"HRL\",\n\"HST\",\n\"HPQ\",\n\"HUM\",\n\"HBAN\",\n\"HII\",\n\"IDXX\",\n\"INFO\",\n\"ITW\",\n\"ILMN\",\n\"IR\",\n\"INTC\",\n\"ICE\",\n\"IBM\",\n\"INCY\",\n\"IP\",\n\"IPG\",\n\"IFF\",\n\"INTU\",\n\"ISRG\",\n\"IVZ\",\n\"IPGP\",\n\"IQV\",\n\"IRM\",\n\"JKHY\",\n\"JEC\",\n\"JBHT\",\n\"JEF\",\n\"SJM\",\n\"JNJ\",\n\"JCI\",\n\"JPM\",\n\"JNPR\",\n\"KSU\",\n\"K\",\n\"KEY\",\n\"KEYS\",\n\"KMB\",\n\"KIM\",\n\"KMI\",\n\"KLAC\",\n\"KSS\",\n\"KHC\",\n\"KR\",\n\"LB\",\n\"LLL\",\n\"LH\",\n\"LRCX\",\n\"LW\",\n\"LEG\",\n\"LEN\",\n\"LLY\",\n\"LNC\",\n\"LIN\",\n\"LKQ\",\n\"LMT\",\n\"L\",\n\"LOW\",\n\"LYB\",\n\"MTB\",\n\"MAC\",\n\"M\",\n\"MRO\",\n\"MPC\",\n\"MAR\",\n\"MMC\",\n\"MLM\",\n\"MAS\",\n\"MA\",\n\"MAT\",\n\"MKC\",\n\"MXIM\",\n\"MCD\",\n\"MCK\",\n\"MDT\",\n\"MRK\",\n\"MET\",\n\"MTD\",\n\"MGM\",\n\"MCHP\",\n\"MU\",\n\"MSFT\",\n\"MAA\",\n\"MHK\",\n\"TAP\",\n\"MDLZ\",\n\"MNST\",\n\"MCO\",\n\"MS\",\n\"MOS\",\n\"MSI\",\n\"MSCI\",\n\"MYL\",\n\"NDAQ\",\n\"NOV\",\n\"NKTR\",\n\"NTAP\",\n\"NFLX\",\n\"NWL\",\n\"NEM\",\n\"NWSA\",\n\"NWS\",\n\"NEE\",\n\"NLSN\",\n\"NKE\",\n\"NI\",\n\"NBL\",\n\"JWN\",\n\"NSC\",\n\"NTRS\",\n\"NOC\",\n\"NCLH\",\n\"NRG\",\n\"NUE\",\n\"NVDA\",\n\"ORLY\",\n\"OXY\",\n\"OMC\",\n\"OKE\",\n\"ORCL\",\n\"PCAR\",\n\"PKG\",\n\"PH\",\n\"PAYX\",\n\"PYPL\",\n\"PNR\",\n\"PBCT\",\n\"PEP\",\n\"PKI\",\n\"PRGO\",\n\"PFE\",\n\"PM\",\n\"PSX\",\n\"PNW\",\n\"PXD\",\n\"PNC\",\n\"RL\",\n\"PPG\",\n\"PPL\",\n\"PFG\",\n\"PG\",\n\"PGR\",\n\"PLD\",\n\"PRU\",\n\"PEG\",\n\"PSA\",\n\"PHM\",\n\"PVH\",\n\"QRVO\",\n\"PWR\",\n\"QCOM\",\n\"DGX\",\n\"RJF\",\n\"RTN\",\n\"O\",\n\"RHT\",\n\"REG\",\n\"REGN\",\n\"RF\",\n\"RSG\",\n\"RMD\",\n\"RHI\",\n\"ROK\",\n\"ROL\",\n\"ROP\",\n\"ROST\",\n\"RCL\",\n\"CRM\",\n\"SBAC\",\n\"SLB\",\n\"STX\",\n\"SEE\",\n\"SRE\",\n\"SHW\",\n\"SPG\",\n\"SWKS\",\n\"SLG\",\n\"SNA\",\n\"SO\",\n\"LUV\",\n\"SPGI\",\n\"SWK\",\n\"SBUX\",\n\"STT\",\n\"SYK\",\n\"STI\",\n\"SIVB\",\n\"SYMC\",\n\"SYF\",\n\"SNPS\",\n\"SYY\",\n\"TROW\",\n\"TTWO\",\n\"TPR\",\n\"TGT\",\n\"TEL\",\n\"FTI\",\n\"TFX\",\n\"TXN\",\n\"TXT\",\n\"TMO\",\n\"TIF\",\n\"TWTR\",\n\"TJX\",\n\"TMK\",\n\"TSS\",\n\"TSCO\",\n\"TDG\",\n\"TRV\",\n\"TRIP\",\n\"FOXA\",\n\"FOX\",\n\"TSN\",\n\"UDR\",\n\"ULTA\",\n\"USB\",\n\"UAA\",\n\"UA\",\n\"UNP\",\n\"UAL\",\n\"UNH\",\n\"UPS\",\n\"URI\",\n\"UTX\",\n\"UHS\",\n\"UNM\",\n\"VFC\",\n\"VLO\",\n\"VAR\",\n\"VTR\",\n\"VRSN\",\n\"VRSK\",\n\"VZ\",\n\"VRTX\",\n\"VIAB\",\n\"V\",\n\"VNO\",\n\"VMC\",\n\"WAB\",\n\"WMT\",\n\"WBA\",\n\"DIS\",\n\"WM\",\n\"WAT\",\n\"WEC\",\n\"WCG\",\n\"WFC\",\n\"WELL\",\n\"WDC\",\n\"WU\",\n\"WRK\",\n\"WY\",\n\"WHR\",\n\"WMB\",\n\"WLTW\",\n\"WYNN\",\n\"XEL\",\n\"XRX\",\n\"XLNX\",\n\"XYL\",\n\"YUM\",\n\"ZBH\",\n\"ZION\",\n\"ZTS\"]);\nrunning = false;",
-        "inputs": {},
-        "outputs": {
-          "data": true
         },
-        "id": 5,
-        "layer_id": 0,
-        "position": {
-          "left": 416,
-          "right": 579,
-          "top": 416
+        "domrect": {
+          "x": 390,
+          "y": 367,
+          "width": 120,
+          "height": 40,
+          "top": 367,
+          "right": 510,
+          "bottom": 407,
+          "left": 390
         }
       },
       "14": {
@@ -604,6 +602,16 @@
           "left": 1313,
           "right": 1433,
           "top": 298
+        },
+        "domrect": {
+          "x": 1264,
+          "y": 310,
+          "width": 120,
+          "height": 75,
+          "top": 310,
+          "right": 1384,
+          "bottom": 385,
+          "left": 1264
         }
       },
       "17": {
@@ -623,6 +631,16 @@
           "left": 868,
           "right": 1006,
           "top": 384
+        },
+        "domrect": {
+          "x": 819,
+          "y": 396,
+          "width": 140.203125,
+          "height": 40,
+          "top": 396,
+          "right": 959.203125,
+          "bottom": 436,
+          "left": 819
         }
       },
       "18": {
@@ -642,20 +660,16 @@
           "left": 1038,
           "right": 1274,
           "top": 370
-        }
-      },
-      "19": {
-        "module": "list",
-        "name": "trending",
-        "inputs": {
-          "data": true
         },
-        "id": 19,
-        "layer_id": 0,
-        "position": {
-          "left": 1641,
-          "right": 1734,
-          "top": 313
+        "domrect": {
+          "x": 989,
+          "y": 382,
+          "width": 238.28125,
+          "height": 40,
+          "top": 382,
+          "right": 1227.28125,
+          "bottom": 422,
+          "left": 989
         }
       },
       "21": {
@@ -675,6 +689,16 @@
           "left": 746,
           "right": 864,
           "top": 94
+        },
+        "domrect": {
+          "x": 697,
+          "y": 106,
+          "width": 120,
+          "height": 40,
+          "top": 106,
+          "right": 817,
+          "bottom": 146,
+          "left": 697
         }
       },
       "22": {
@@ -695,6 +719,16 @@
           "left": 736,
           "right": 858,
           "top": 246
+        },
+        "domrect": {
+          "x": 687,
+          "y": 258,
+          "width": 123.5625,
+          "height": 40,
+          "top": 258,
+          "right": 810.5625,
+          "bottom": 298,
+          "left": 687
         }
       },
       "23": {
@@ -713,9 +747,19 @@
         "id": 23,
         "layer_id": 0,
         "position": {
-          "left": 1676,
-          "right": 1794,
-          "top": 13
+          "left": 1492,
+          "right": 1640,
+          "top": 28
+        },
+        "domrect": {
+          "x": 1627,
+          "y": 25,
+          "width": 120,
+          "height": 54,
+          "top": 25,
+          "right": 1747,
+          "bottom": 79,
+          "left": 1627
         }
       },
       "24": {
@@ -736,6 +780,16 @@
           "left": 460,
           "right": 599,
           "top": 226
+        },
+        "domrect": {
+          "x": 411,
+          "y": 238,
+          "width": 140.8125,
+          "height": 40,
+          "top": 238,
+          "right": 551.8125,
+          "bottom": 278,
+          "left": 411
         }
       },
       "25": {
@@ -754,8 +808,18 @@
         "layer_id": 0,
         "position": {
           "left": 1035,
-          "right": 1167,
+          "right": 1165,
           "top": 240
+        },
+        "domrect": {
+          "x": 986,
+          "y": 252,
+          "width": 132.140625,
+          "height": 40,
+          "top": 252,
+          "right": 1118.140625,
+          "bottom": 292,
+          "left": 986
         }
       },
       "26": {
@@ -776,6 +840,16 @@
           "left": 1040,
           "right": 1203,
           "top": 103
+        },
+        "domrect": {
+          "x": 991,
+          "y": 115,
+          "width": 165.0625,
+          "height": 40,
+          "top": 115,
+          "right": 1156.0625,
+          "bottom": 155,
+          "left": 991
         }
       },
       "27": {
@@ -795,6 +869,16 @@
           "left": 2187,
           "right": 2274,
           "top": 123
+        },
+        "domrect": {
+          "x": 2138,
+          "y": 135,
+          "width": 120,
+          "height": 45,
+          "top": 135,
+          "right": 2258,
+          "bottom": 180,
+          "left": 2138
         }
       },
       "28": {
@@ -813,9 +897,19 @@
         "id": 28,
         "layer_id": 0,
         "position": {
-          "left": 1590,
+          "left": 1514,
           "right": 1708,
-          "top": 209
+          "top": 170
+        },
+        "domrect": {
+          "x": 1541,
+          "y": 221,
+          "width": 120,
+          "height": 72,
+          "top": 221,
+          "right": 1661,
+          "bottom": 293,
+          "left": 1541
         }
       },
       "29": {
@@ -836,6 +930,16 @@
           "left": 1944,
           "right": 2062,
           "top": -6
+        },
+        "domrect": {
+          "x": 1895,
+          "y": 6,
+          "width": 120,
+          "height": 40,
+          "top": 6,
+          "right": 2015,
+          "bottom": 46,
+          "left": 1895
         }
       },
       "30": {
@@ -856,6 +960,16 @@
           "left": 745,
           "right": 850,
           "top": -41
+        },
+        "domrect": {
+          "x": 696,
+          "y": -29,
+          "width": 120,
+          "height": 40,
+          "top": -29,
+          "right": 816,
+          "bottom": 11,
+          "left": 696
         }
       },
       "31": {
@@ -876,6 +990,16 @@
           "left": 1017,
           "right": 1194,
           "top": -38
+        },
+        "domrect": {
+          "x": 968,
+          "y": -26,
+          "width": 179.234375,
+          "height": 40,
+          "top": -26,
+          "right": 1147.234375,
+          "bottom": 14,
+          "left": 968
         }
       },
       "32": {
@@ -896,8 +1020,18 @@
         "layer_id": 0,
         "position": {
           "left": 1928,
-          "right": 2046,
+          "right": 2048,
           "top": 205
+        },
+        "domrect": {
+          "x": 1879,
+          "y": 217,
+          "width": 120,
+          "height": 60,
+          "top": 217,
+          "right": 1999,
+          "bottom": 277,
+          "left": 1879
         }
       },
       "33": {
@@ -915,80 +1049,86 @@
           "top": -42
         },
         "id": 33,
-        "layer_id": 0
+        "layer_id": 0,
+        "domrect": {
+          "x": -258,
+          "y": -30,
+          "width": 120,
+          "height": 40,
+          "top": -30,
+          "right": -138,
+          "bottom": 10,
+          "left": -258
+        }
       },
-      "34": {
-        "module": "js",
-        "name": "Trending stocks",
-        "require": "const got = require('got');\nconst cache = {};",
-        "run": "if (cache.timestamp) {\n  outputs.body.put(cache.data);\n}\nconst res = await got.post(\n  \"https://query2.finance.yahoo.com/v1/finance/screener?crumb=XXGScF6UERt&lang=en-US&region=US&formatted=true&corsDomain=finance.yahoo.com\",\n  {\n    responseType: \"json\",\n    headers: {\n    \tauthority: \"query2.finance.yahoo.com\"\n    },\n    json: {\n      offset: 0,\n      size: 10,\n      sortField: \"intradaypricechange\",\n      sortType: \"desc\",\n      quoteType: \"EQUITY\",\n      query: {\n        operator: \"AND\",\n        operands: [\n          {\n            operator: \"GT\",\n            operands: [\"percentchange\", 3],\n          },\n          {\n            operator: \"eq\",\n            operands: [\"region\", \"us\"],\n          },\n          {\n            operator: \"or\",\n            operands: [\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 2000000000, 10000000000],\n              },\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 10000000000, 100000000000],\n              },\n              { operator: \"GT\", operands: [\"intradaymarketcap\", 100000000000] },\n            ],\n          },\n          { operator: \"gt\", operands: [\"dayvolume\", 15000] },\n        ],\n      },\n      userId: \"\",\n      userIdType: \"guid\",\n    },\n  }\n);\nif (res.body && outputs.data) {\n  cache.time = Date.now();\n  cache.data = res.body;\n  outputs.data.put(res.body)\n}\n\n",
+      "37": {
+        "module": "webviewnode",
+        "name": "webviewnode",
+        "require": "",
+        "run": "function Sleep(duration) {\n  return new Promise(resolve => setTimeout(resolve, duration));\n}\n\n(async() => {\n  document.querySelector(\"#scr-res-table > div.Ovx\\\\(a\\\\).Ovx\\\\(h\\\\)--print.Ovy\\\\(h\\\\) > table > thead > tr > th:nth-child(4)\").click()\n  await Sleep(1000)\n  document.querySelector(\"#scr-res-table > div.Ovx\\\\(a\\\\).Ovx\\\\(h\\\\)--print.Ovy\\\\(h\\\\) > table > thead > tr > th:nth-child(4)\").click()\n  await Sleep(1000)\n  let els = []\n  for (let i = 1; i <= 10; i++) {\n  \tlet ticker = document.querySelector(`#scr-res-table table tr:nth-child(${i}) a`).innerText\n    els.push(ticker)\n  }\n  console.log(els)\n  return els;\n})()\n",
+        "src": "https://finance.yahoo.com/gainers",
         "inputs": {},
         "outputs": {
           "data": true
         },
         "position": {
-          "left": -190,
-          "right": -43,
-          "top": -185
+          "left": 23,
+          "right": 513,
+          "top": 420
         },
-        "id": 34,
+        "style": {
+          "width": "500px",
+          "height": "500px"
+        },
+        "id": 37,
         "layer_id": 0
       },
-      "35": {
-        "module": "js",
-        "name": "results",
-        "require": "",
-        "run": "const data = await inputs.data.take();\noutputs.result.put(data.finance.result[0]);\noutputs.error.put(data.finance.error);",
+      "38": {
+        "module": "chartjs",
+        "name": "trending",
         "inputs": {
           "data": true
         },
-        "outputs": {
-          "result": true,
-          "error": true
-        },
+        "id": 38,
+        "layer_id": 0,
         "position": {
-          "left": -2,
-          "right": 118,
-          "top": -198
-        },
-        "id": 35,
-        "layer_id": 0
-      },
-      "36": {
-        "module": "js",
-        "name": "js",
-        "require": "",
-        "run": "const data = await inputs.data.take();\nconsole.log(data);",
-        "inputs": {
-          "data": true
-        },
-        "outputs": {},
-        "position": {
-          "left": 174,
-          "right": 294,
-          "top": -238
-        },
-        "id": 36,
-        "layer_id": 0
+          "left": 1647,
+          "right": 1765,
+          "top": 333
+        }
       }
     },
     "packets": {},
     "configuring": {
       "module": "js",
-      "name": "Trending stocks",
-      "require": "const got = require('got');",
-      "run": "const res = await got.post(\n  \"https://query2.finance.yahoo.com/v1/finance/screener?crumb=XXGScF6UERt&lang=en-US&region=US&formatted=true&corsDomain=finance.yahoo.com\",\n  {\n    responseType: \"json\",\n    headers: {\n    \tauthority: \"query2.finance.yahoo.com\"\n    },\n    json: {\n      offset: 0,\n      size: 10,\n      sortField: \"intradaypricechange\",\n      sortType: \"desc\",\n      quoteType: \"EQUITY\",\n      query: {\n        operator: \"AND\",\n        operands: [\n          {\n            operator: \"GT\",\n            operands: [\"percentchange\", 3],\n          },\n          {\n            operator: \"eq\",\n            operands: [\"region\", \"us\"],\n          },\n          {\n            operator: \"or\",\n            operands: [\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 2000000000, 10000000000],\n              },\n              {\n                operator: \"BTWN\",\n                operands: [\"intradaymarketcap\", 10000000000, 100000000000],\n              },\n              { operator: \"GT\", operands: [\"intradaymarketcap\", 100000000000] },\n            ],\n          },\n          { operator: \"gt\", operands: [\"dayvolume\", 15000] },\n        ],\n      },\n      userId: \"\",\n      userIdType: \"guid\",\n    },\n  }\n);\nif (res.body && outputs.data) {\n  outputs.data.put(res.body)\n}\n\n",
-      "inputs": {},
+      "name": "Keep trending positions",
+      "require": "const _ = require(\"lodash\");",
+      "run": "let positions = await inputs.positions.take();\npositions = _.keyBy(positions, 'symbol');\nconst scores = await inputs.score.take();\n_.forEach(scores.positive, function(symbol) {\n  console.log(\"removing positive position\", symbol);\n  delete positions[symbol];\n});\nif (Object.keys(positions).length) {\n  console.log(\"sell positions\");\n  outputs.positions.put(positions);  \n} else {\n  outputs.noSells.put(\"*\");\n}\n\n\n",
+      "inputs": {
+        "positions": true,
+        "score": true
+      },
       "outputs": {
-        "data": true
+        "positions": true,
+        "noSells": true
       },
+      "id": 28,
+      "layer_id": 0,
       "position": {
-        "left": -190,
-        "right": -43,
-        "top": -185
+        "left": 1514,
+        "right": 1708,
+        "top": 170
       },
-      "id": 34,
-      "layer_id": 0
+      "domrect": {
+        "x": 1541,
+        "y": 221,
+        "width": 120,
+        "height": 72,
+        "top": 221,
+        "right": 1661,
+        "bottom": 293,
+        "left": 1541
+      }
     },
     "addingLink": {},
     "mouseOverPort": "",
