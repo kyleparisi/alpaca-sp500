@@ -27,11 +27,11 @@
       }
     },
     "editor": {
-      "height": 152
+      "height": 357
     },
     "pan": {
       "x": 82,
-      "y": 74
+      "y": 73
     },
     "throttle": 2,
     "scale": 1,
@@ -193,7 +193,8 @@
           "port": "quotes"
         },
         "id": 71,
-        "layer_id": 0
+        "layer_id": 0,
+        "logging": true
       },
       "72": {
         "direction": "->",
@@ -206,7 +207,8 @@
           "port": "hasBuyingPower"
         },
         "id": 72,
-        "layer_id": 0
+        "layer_id": 0,
+        "logging": true
       },
       "73": {
         "direction": "->",
@@ -575,7 +577,7 @@
         "module": "js",
         "name": "Buy stuff",
         "require": "",
-        "run": "",
+        "run": "let buyingPower = hasBuyingPower.buying_power;\nconst orders = quotes.map(quote => {\n  order = {};\n  order[quote.symbol] = {\n    \"side\": \"buy\",\n    \"symbol\": quote.symbol,\n    \"type\": \"market\",\n    \"qty\": 0,\n    \"time_in_force\": \"gtc\",\n    \"order_class\": \"bracket\",\n    \"take_profit\": {\n      \"limit_price\": 0\n    },\n    \"stop_loss\": {\n      \"stop_price\": 0,\n      \"limit_price\": 0\n    }\n  }\n});\n",
         "inputs": {
           "hasBuyingPower": true,
           "noPendingOrders": true,
