@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/kyleparisi/alpaca-sp500#readme",
   "dependencies": {
-    "@alpacahq/alpaca-trade-api": "^1.1.0",
+    "@alpacahq/alpaca-trade-api": "^1.4.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "lodash": "^4.17.11",

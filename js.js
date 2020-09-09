@@ -9,9 +9,17 @@ function main() {
   };
 
   let run = "";
+  let waits = "";
+  Object.keys(this.node.inputs).map(input_name => {
+    if (!this.node.inputs[input_name])  return false;
+    waits += `
+const ${input_name} = await inputs.${input_name}.take();
+`
+  });
+
   if (this.node.run.indexOf('await inputs') !== -1 || this.node.run.indexOf('await outputs') !== -1) {
     run = `while(this.running) {
-    ${this.node.run}
+      ${this.node.run}
     }`;
   } else {
     run = this.node.run;
@@ -21,6 +29,7 @@ function main() {
 (async () => {
 ${this.node.require || ""}
 try {
+  ${waits}
   ${run}
 } catch(e) {
   console.log(e);
