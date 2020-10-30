@@ -30,8 +30,8 @@
       "height": 357
     },
     "pan": {
-      "x": 82,
-      "y": 73
+      "x": -600,
+      "y": 18
     },
     "throttle": 2,
     "scale": 1,
@@ -213,14 +213,27 @@
       "73": {
         "direction": "->",
         "source": {
-          "node": 31,
-          "port": "false"
+          "node": 1,
+          "port": "alpaca"
         },
         "target": {
-          "node": 38,
-          "port": "noPendingOrders"
+          "node": 39,
+          "port": "alpaca"
         },
         "id": 73,
+        "layer_id": 0
+      },
+      "74": {
+        "direction": "->",
+        "source": {
+          "node": 38,
+          "port": "orders"
+        },
+        "target": {
+          "node": 39,
+          "port": "orders"
+        },
+        "id": 74,
         "layer_id": 0
       }
     },
@@ -575,42 +588,61 @@
       },
       "38": {
         "module": "js",
-        "name": "Buy stuff",
+        "name": "Make orders",
         "require": "",
-        "run": "let buyingPower = hasBuyingPower.buying_power;\nconst orders = quotes.map(quote => {\n  order = {};\n  order[quote.symbol] = {\n    \"side\": \"buy\",\n    \"symbol\": quote.symbol,\n    \"type\": \"market\",\n    \"qty\": 0,\n    \"time_in_force\": \"gtc\",\n    \"order_class\": \"bracket\",\n    \"take_profit\": {\n      \"limit_price\": 0\n    },\n    \"stop_loss\": {\n      \"stop_price\": 0,\n      \"limit_price\": 0\n    }\n  }\n});\n",
+        "run": "let buyingPower = hasBuyingPower.buying_power;\nconst orders = {}\nquotes.map(quote => {\n  orders[quote.symbol] = {\n    \"side\": \"buy\",\n    \"symbol\": quote.symbol,\n    \"type\": \"market\",\n    \"qty\": 0,\n    \"time_in_force\": \"gtc\",\n    \"order_class\": \"bracket\",\n    \"take_profit\": {\n      \"limit_price\": 0\n    },\n    \"stop_loss\": {\n      \"stop_price\": 0\n    }\n  }\n});\nconsole.log(orders)\n\nfunction processQuote(quote) {\n  const delta = buyingPower - quote.last.bidprice;\n  if (delta < 0) {\n    console.log(`Not enough buying power for ${quote.symbol}`);\n    return false\n  }\n  buyingPower = delta\n  orders[quote.symbol].qty += 1;\n  const profit = parseFloat((quote.last.askprice * 1.02).toFixed(2));\n  const stopLoss = parseFloat((quote.last.bidprice * 0.95).toFixed(2));\n  orders[quote.symbol].take_profit.limit_price = profit;\n  orders[quote.symbol].stop_loss.stop_price = stopLoss;\n  if (profit < stopLoss) {\n    console.log(profit, stopLoss, quote)\n    throw new Error(\"need more profit\");\n    return\n  }\n  return true\n}\n\nfunction recurse() {\n  const results = quotes.map(processQuote)\n  if (results.filter(r => r).length > 0) {\n    recurse()\n  }\n}\nrecurse()\n\n// remove qty 0\nObject.keys(orders).map(key => {\n  if (orders[key].qty === 0) {\n  \tdelete orders[key]\n  }\n});\n\n\nconsole.log(orders)\noutputs.orders.put(Object.values(orders))\n",
         "inputs": {
           "hasBuyingPower": true,
-          "noPendingOrders": true,
+          "noPendingOrders": false,
           "quotes": true
+        },
+        "outputs": {
+          "orders": true
+        },
+        "position": {
+          "left": 1219,
+          "right": 1337,
+          "top": 323
+        },
+        "id": 38,
+        "layer_id": 0
+      },
+      "39": {
+        "module": "js",
+        "name": "Submit orders",
+        "require": "",
+        "run": "orders.map(order => {\n  alpaca.createOrder(order)\n  .then(console.log)\n  .catch(e => {\n    if (!e.base_price) {\n      console.log(e)\n      return\n    }\n    order.take_profit.limit_price = (parseFloat(e.base_price) * 1.02).toFixed(2)\n    console.log(\"retrying order\")\n    alpaca.createOrder(order).then(console.log).catch(console.log)\n    \n  })\n})",
+        "inputs": {
+          "alpaca": true,
+          "orders": true
         },
         "outputs": {},
         "position": {
-          "left": 1276,
-          "right": 1394,
-          "top": 293
+          "left": 1511,
+          "right": 1554,
+          "top": 284
         },
-        "id": 38,
+        "id": 39,
         "layer_id": 0
       }
     },
     "packets": {},
     "configuring": {
       "module": "js",
-      "name": "Buy stuff",
+      "name": "Submit orders",
       "require": "",
-      "run": "",
+      "run": "orders.map(order => {\n  alpaca.createOrder(order)\n  .then(console.log)\n  .catch(e => {\n    if (!e.base_price) {\n      console.log(e)\n      return\n    }\n    order.take_profit.limit_price = (parseFloat(e.base_price) * 1.02).toFixed(2)\n    console.log(\"retrying order\")\n    alpaca.createOrder(order).then(console.log).catch(console.log)\n    \n  })\n})",
       "inputs": {
-        "hasBuyingPower": true,
-        "noPendingOrders": true,
-        "quotes": true
+        "alpaca": true,
+        "orders": true
       },
       "outputs": {},
       "position": {
-        "left": 1276,
-        "right": 1394,
-        "top": 293
+        "left": 1511,
+        "right": 1554,
+        "top": 284
       },
-      "id": 38,
+      "id": 39,
       "layer_id": 0
     },
     "addingLink": {},
