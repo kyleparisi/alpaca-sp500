@@ -30,8 +30,8 @@
       "height": 357
     },
     "pan": {
-      "x": 643,
-      "y": 243
+      "x": 83,
+      "y": 127
     },
     "throttle": 2,
     "scale": 1,
@@ -208,19 +208,6 @@
           "port": "alpaca"
         },
         "id": 73,
-        "layer_id": 0
-      },
-      "74": {
-        "direction": "->",
-        "source": {
-          "node": 38,
-          "port": "orders"
-        },
-        "target": {
-          "node": 39,
-          "port": "orders"
-        },
-        "id": 74,
         "layer_id": 0
       },
       "75": {
