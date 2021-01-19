@@ -1402,10 +1402,10 @@ data.map(layer => {
 
   try {
     function ping() {
-      setTimeout(() => {
-        outputs.ping.put("*");
-        ping();
-      }, 360000);
+      //setTimeout(() => {
+        //outputs.ping.put("*");
+        //ping();
+      //}, 360000);
     }
     outputs.ping.put("*");
     ping();
